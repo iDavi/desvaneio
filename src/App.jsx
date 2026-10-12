@@ -1,7 +1,10 @@
 import { useEffect, useRef, useSyncExternalStore } from 'react';
-import { posts } from './posts';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import postData from './generated/posts.json';
 import CoverSlideshow from './CoverSlideshow';
 
+const posts = postData.posts;
 const PAGE_SIZE = 5;
 
 function subscribe(callback) {
@@ -63,6 +66,7 @@ function Archive() {
   return (
     <section className="archive" aria-labelledby="archive-title">
       <h2 id="archive-title">archive</h2>
+      {posts.length === 0 && <p className="empty-state">Ainda não há posts.</p>}
       {years.map((year) => (
         <section className="archive-year" key={year} aria-labelledby={`year-${year}`}>
           <h3 id={`year-${year}`}>{year}</h3>
@@ -82,9 +86,8 @@ function Article({ post }) {
     <article className="article">
       <DateLabel date={post.date} />
       <h2>{post.title}</h2>
-      <p className="sample-note">Texto de exemplo para o esboço do blog.</p>
       <div className="article-body">
-        {post.paragraphs.map((paragraph, i) => <p key={i}>{paragraph}</p>)}
+        <ReactMarkdown remarkPlugins={[remarkGfm]} skipHtml>{post.body}</ReactMarkdown>
       </div>
       <nav className="article-navigation" aria-label="Navegação entre posts">
         {older && <a href={`#/posts/${older.slug}`}>← previous</a>}
@@ -121,6 +124,7 @@ export default function App() {
             {route.kind === 'index' && (
               <>
                 <h2 className="sr-only">Posts — página {route.page}</h2>
+                {posts.length === 0 && <p className="empty-state">Ainda não há posts.</p>}
                 <PostList entries={posts.slice((route.page - 1) * PAGE_SIZE, route.page * PAGE_SIZE)} />
                 <Pagination page={route.page} />
               </>

@@ -1,0 +1,64 @@
+name: Sync blog posts
+
+on:
+  issues:
+    types: [opened, edited, labeled, unlabeled, closed, reopened, deleted, transferred]
+  label:
+    types: [edited, deleted]
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - 'public/**'
+      - 'index.html'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'vite.config.js'
+      - 'blog.config.json'
+      - '.github/workflows/sync-posts.yml'
+
+permissions:
+  contents: write
+  issues: read
+
+concurrency:
+  group: sync-blog-posts
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - name: Fetch published issues
+        run: npm run sync:posts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: npm run build
+      - name: Save updated posts to the repository
+        run: |
+          git add src/generated/posts.json
+          if ! git diff --cached --quiet; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m 'Update posts from GitHub Issues'
+            git push origin HEAD:main
+          fi
+      - name: Save the static build for review
+        uses: actions/upload-artifact@v7
+        with:
+          name: blog-build
+          path: dist/
+          retention-days: 7
