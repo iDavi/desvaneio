@@ -1,4 +1,4 @@
-name: Sync blog posts
+name: Publish blog
 
 on:
   issues:
@@ -24,6 +24,8 @@ on:
 permissions:
   contents: write
   issues: read
+  pages: write
+  id-token: write
 
 concurrency:
   group: sync-blog-posts
@@ -57,9 +59,18 @@ jobs:
             git commit -m 'Update posts from GitHub Issues'
             git push origin HEAD:main
           fi
-      - name: Save the static build for review
-        uses: actions/upload-artifact@v7
+      - name: Upload GitHub Pages build
+        uses: actions/upload-pages-artifact@v5
         with:
-          name: blog-build
           path: dist/
-          retention-days: 7
+
+  deploy:
+    needs: sync
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
