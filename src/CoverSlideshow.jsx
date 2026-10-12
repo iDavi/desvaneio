@@ -1,16 +1,5 @@
 import { useEffect, useState } from 'react';
-
-// Imagens locais, baixadas dos pins indicados no README.
-const photos = [
-  {
-    file: 'cover.jpg',
-    alt: 'Rita Lee com Os Mutantes, usando capa e chapéu de maga e olhando para a câmera.',
-  },
-  {
-    file: 'rita-lee-maga.jpg',
-    alt: 'Retrato frontal de Rita Lee com chapéu de maga, capa azul e uma flor vermelha.',
-  },
-];
+import { coverPhotos as photos } from './coverPhotos';
 
 export default function CoverSlideshow() {
   const [active, setActive] = useState(0);
