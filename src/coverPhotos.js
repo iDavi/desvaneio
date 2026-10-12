@@ -1,4 +1,4 @@
-// Fotos baixadas do Pinterest aberto no Chrome; a ordem define o ciclo.
+// Fotos baixadas do Pinterest aberto no Chrome; exibidas aleatoriamente.
 export const coverPhotos = [
   {
     file: 'cover.jpg',

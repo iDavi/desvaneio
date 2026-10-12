@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { coverPhotos as photos } from './coverPhotos';
 
 export default function CoverSlideshow() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(() => Math.floor(Math.random() * photos.length));
   const [loaded, setLoaded] = useState(() => photos.map(() => false));
   const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(
@@ -18,9 +18,12 @@ export default function CoverSlideshow() {
 
   useEffect(() => {
     // Começa apenas quando todas as fotos estão prontas; evita flashes vazios.
-    if (paused || reducedMotion || !loaded.every(Boolean)) return;
+    if (paused || reducedMotion || photos.length < 2 || !loaded.every(Boolean)) return;
     const timer = window.setInterval(() => {
-      if (!document.hidden) setActive((index) => (index + 1) % photos.length);
+      if (!document.hidden) {
+        const step = 1 + Math.floor(Math.random() * (photos.length - 1));
+        setActive((index) => (index + step) % photos.length);
+      }
     }, 5000);
     return () => window.clearInterval(timer);
   }, [loaded, paused, reducedMotion]);
@@ -36,7 +39,7 @@ export default function CoverSlideshow() {
           aria-hidden={active !== index}
           width="367"
           height="490"
-          fetchPriority={index === 0 ? 'high' : 'auto'}
+          fetchPriority={active === index ? 'high' : 'auto'}
           loading="eager"
           onLoad={() => setLoaded((current) => current.map((ready, i) => i === index || ready))}
         />
