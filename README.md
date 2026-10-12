@@ -22,8 +22,8 @@ npm run preview
 
 - **Posts:** `src/posts.js`. Cada entrada tem `slug` único, `date` em `YYYY-MM-DD`, `title` e um array de parágrafos. A ordem do array define a ordem de exibição; coloque os mais recentes primeiro. As datas e os textos atuais são fictícios, para demonstrar o layout; os textos não são transcrições de Mark Fisher.
 - **Visual:** `src/styles.css`. As cores ficam nas variáveis no início do arquivo.
-- **Imagem:** `public/images/cover.jpg`, extraída do mockup fornecido para este esboço. Substitua pelo arquivo original em melhor resolução ou por outra imagem de sua escolha e atualize o texto alternativo em `src/main.jsx`.
-- **Nome e descrição:** `index.html` e o título em `src/main.jsx`.
+- **Imagem:** `public/images/cover.jpg`, extraída do mockup fornecido para este esboço. Substitua pelo arquivo original em melhor resolução ou por outra imagem de sua escolha e atualize o texto alternativo em `src/App.jsx`.
+- **Nome e descrição:** `index.html` e o título em `src/App.jsx`.
 
 O índice mostra cinco posts por página. `previous` leva aos mais antigos e `next` aos mais recentes; links indisponíveis aparecem atenuados. O arquivo agrupa todos os posts por ano. Cada post tem sua página e navegação própria.
 
