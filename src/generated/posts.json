@@ -2,6 +2,15 @@
   "repository": "iDavi/desvaneio",
   "posts": [
     {
+      "number": 3,
+      "slug": "issue-3",
+      "title": "the man without the head",
+      "date": "2026-10-12",
+      "createdAt": "2026-10-12T20:27:21Z",
+      "body": "<img width=\"467\" height=\"657\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/c58774bb-99e2-42a8-b4c5-c8adcf28a762\" />\n\n<img width=\"960\" height=\"1358\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/ca7ee5e3-82f2-48e7-9178-20d4989a99e9\" />\n\n<img width=\"577\" height=\"577\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/ed9e0f2e-ee92-478b-9d92-da2f0e1b436e\" />\n\n<img width=\"240\" height=\"360\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/f92edf14-93e8-4d6e-b0d6-d11456ccfe94\" />\n\n<img width=\"1000\" height=\"1235\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/a0d54c4e-1294-4579-9cdf-b06b5b5a4113\" />",
+      "issueUrl": "https://github.com/iDavi/desvaneio/issues/3"
+    },
+    {
       "number": 2,
       "slug": "issue-2",
       "title": "option value pricing model",
