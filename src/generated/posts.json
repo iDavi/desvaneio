@@ -2,6 +2,15 @@
   "repository": "iDavi/desvaneio",
   "posts": [
     {
+      "number": 2,
+      "slug": "issue-2",
+      "title": "option value pricing model",
+      "date": "2026-10-12",
+      "createdAt": "2026-10-12T20:22:44Z",
+      "body": "I kept hearing the phrase _option value pricing model_ in my head, hearing it over and over \n\n_option value pricing model_\n_option value pricing model_\n\nbut I had only the vaguest notion anymore of what this meant \n\nit was like waking up after a dream in which you've been speaking a foreign language only to find out you that you don't speak the language at all \n\nand barely even understand a word of it\n\n[\"No Time\" by mark fisher](https://www.youtube.com/watch?v=8Bk0kkRPmjE)\n\n",
+      "issueUrl": "https://github.com/iDavi/desvaneio/issues/2"
+    },
+    {
       "number": 1,
       "slug": "issue-1",
       "title": "test",
