@@ -75,19 +75,3 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v5
 
-      - name: Enforce HTTPS when the certificate is ready
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          for attempt in {1..60}; do
-            if gh api --method PUT repos/${{ github.repository }}/pages -F https_enforced=true 2>https-error.txt; then
-              exit 0
-            fi
-            if ! grep -q 'certificate does not exist yet' https-error.txt; then
-              cat https-error.txt >&2
-              exit 1
-            fi
-            sleep 15
-          done
-          echo '::error::GitHub has not issued the certificate yet. Re-run this job after provisioning finishes.'
-          exit 1
