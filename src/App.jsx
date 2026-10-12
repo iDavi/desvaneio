@@ -1,6 +1,5 @@
 import { useEffect, useRef, useSyncExternalStore } from 'react';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import PostBody from './PostBody';
 import postData from './generated/posts.json';
 import CoverSlideshow from './CoverSlideshow';
 
@@ -89,7 +88,7 @@ function Article({ post }) {
       <DateLabel date={post.date} />
       <h2>{post.title}</h2>
       <div className="article-body">
-        <ReactMarkdown remarkPlugins={[remarkGfm]} skipHtml>{post.body}</ReactMarkdown>
+        <PostBody body={post.body} />
       </div>
       <nav className="article-navigation" aria-label="Navegação entre posts">
         {older && <a href={`#/posts/${older.slug}`}>← previous</a>}

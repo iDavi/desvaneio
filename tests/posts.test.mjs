@@ -5,8 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import PostBody from '../src/PostBody.js';
 import { fetchPublishedPosts, issueToPost, syncPosts } from '../scripts/sync-posts.mjs';
 
 const config = { repository: 'iDavi/desvaneio', label: 'post', timeZone: 'America/Sao_Paulo' };
@@ -80,11 +79,20 @@ test('unexpected or malformed API data fails instead of publishing a bad snapsho
   await assert.rejects(fetchPublishedPosts({ config, token: '', fetchImpl: async () => response([issue({ created_at: 'invalid' })]) }), /invalid creation date/);
 });
 
-test('Markdown renders GitHub tables and images without executing HTML or javascript links', () => {
+test('post renderer preserves Markdown tables and images while removing scripts and javascript links', () => {
   const body = '**Música**\n\n| disco | ano |\n| --- | --- |\n| Mutantes | 1968 |\n\n![Rita](https://example.com/rita.jpg)\n\n<script>alert(1)</script>\n\n[bad](javascript:alert(1))';
-  const html = renderToStaticMarkup(createElement(ReactMarkdown, { remarkPlugins: [remarkGfm], skipHtml: true }, body));
+  const html = renderToStaticMarkup(createElement(PostBody, { body }));
   assert.match(html, /<strong>Música<\/strong>/);
   assert.match(html, /<table>/);
   assert.match(html, /alt="Rita"/);
   assert.doesNotMatch(html, /<script|javascript:/);
+});
+
+test('GitHub uploaded HTML images render with dimensions and alt text, without unsafe attributes', () => {
+  const src = 'https://github.com/user-attachments/assets/c58774bb-99e2-42a8-b4c5-c8adcf28a762';
+  const body = `<img width="467" height="657" alt="Image" src="${src}" onerror="alert(1)" style="position:fixed" />\n\n<img src="javascript:alert(1)" />\n\n<iframe src="https://example.com"></iframe>`;
+  const html = renderToStaticMarkup(createElement(PostBody, { body }));
+  assert.match(html, /<img[^>]*width="467"[^>]*height="657"[^>]*alt="Image"/);
+  assert.ok(html.includes(`src="${src}"`));
+  assert.doesNotMatch(html, /onerror|style=|javascript:|<iframe/);
 });
