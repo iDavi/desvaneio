@@ -135,7 +135,7 @@ export default function App() {
             {route.kind === 'post' && <Article post={route.post} />}
           </main>
         </div>
-        <aside className="image-column" aria-label="Imagem de capa">
+        <aside className={`image-column${route.kind === 'post' ? ' is-invisible' : ''}`} aria-label="Imagem de capa" aria-hidden={route.kind === 'post'}>
           <CoverSlideshow />
         </aside>
       </div>
