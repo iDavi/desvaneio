@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "vite build",
+    "build": "vite build && node scripts/build-post-pages.mjs",
     "preview": "vite preview --host 127.0.0.1",
     "sync:posts": "node scripts/sync-posts.mjs",
     "build:blog": "npm run sync:posts && npm run build",

@@ -2,6 +2,7 @@ import { useEffect, useRef, useSyncExternalStore } from 'react';
 import PostBody from './PostBody';
 import postData from './generated/posts.json';
 import CoverSlideshow from './CoverSlideshow';
+import { resolveRoute } from './route';
 
 const posts = postData.posts;
 const PAGE_SIZE = 5;
@@ -14,19 +15,7 @@ function subscribe(callback) {
 function useRoute() {
   const hash = useSyncExternalStore(subscribe, () => window.location.hash);
   const basePath = new URL(import.meta.env.BASE_URL, window.location.origin).pathname;
-  if (window.location.pathname !== basePath && window.location.pathname !== `${basePath}index.html`) return { kind: 'missing' };
-  const path = hash.replace(/^#\/?/, '').split('/');
-  if (!path[0] && path.length === 1) return { kind: 'index', page: 1 };
-  if (path[0] === 'archive' && path.length === 1) return { kind: 'archive' };
-  if (path[0] === 'posts' && path.length === 2) {
-    const post = posts.find((entry) => entry.slug === path[1]);
-    return post ? { kind: 'post', post } : { kind: 'missing' };
-  }
-  const page = Number(path[1]);
-  if (path[0] === 'page' && path.length === 2 && Number.isInteger(page) && page > 0 && page <= Math.ceil(posts.length / PAGE_SIZE)) {
-    return { kind: 'index', page };
-  }
-  return { kind: 'missing' };
+  return resolveRoute({ pathname: window.location.pathname, hash, basePath, posts, pageSize: PAGE_SIZE });
 }
 
 function DateLabel({ date }) {
@@ -40,7 +29,7 @@ function PostList({ entries }) {
         <li key={post.slug}>
           <DateLabel date={post.date} />
           <span aria-hidden="true"> - </span>
-          <a href={`#/posts/${post.slug}`}>{post.title}</a>
+          <a href={`${import.meta.env.BASE_URL}posts/${post.slug}/`}>{post.title}</a>
         </li>
       ))}
     </ul>
@@ -57,7 +46,7 @@ function Pagination({ page }) {
       {page > 1 ? (
         <a href={page === 2 ? '#/' : `#/page/${page - 1}`} aria-label="next — posts mais recentes">next</a>
       ) : <span className="unavailable" aria-disabled="true">next</span>}
-      <a href="#/archive">archive</a>
+      <a href={`${import.meta.env.BASE_URL}#/archive`}>archive</a>
     </nav>
   );
 }
@@ -74,7 +63,7 @@ function Archive() {
           <PostList entries={posts.filter((post) => post.date.startsWith(year))} />
         </section>
       ))}
-      <nav className="back-navigation" aria-label="Voltar"><a href="#/">← home</a></nav>
+      <nav className="back-navigation" aria-label="Voltar"><a href={import.meta.env.BASE_URL}>← home</a></nav>
     </section>
   );
 }
@@ -91,10 +80,10 @@ function Article({ post }) {
         <PostBody body={post.body} />
       </div>
       <nav className="article-navigation" aria-label="Navegação entre posts">
-        {older && <a href={`#/posts/${older.slug}`}>← previous</a>}
-        {newer && <a href={`#/posts/${newer.slug}`}>next →</a>}
-        <a href="#/archive">archive</a>
-        <a href="#/">home</a>
+        {older && <a href={`${import.meta.env.BASE_URL}posts/${older.slug}/`}>← previous</a>}
+        {newer && <a href={`${import.meta.env.BASE_URL}posts/${newer.slug}/`}>next →</a>}
+        <a href={`${import.meta.env.BASE_URL}#/archive`}>archive</a>
+        <a href={import.meta.env.BASE_URL}>home</a>
       </nav>
     </article>
   );
@@ -107,6 +96,10 @@ export default function App() {
   const previousRoute = useRef(routeKey);
 
   useEffect(() => {
+    if (route.kind === 'post' && !window.location.pathname.includes('/posts/')) {
+      window.location.replace(`${import.meta.env.BASE_URL}posts/${route.post.slug}/`);
+      return;
+    }
     document.title = route.kind === 'missing' ? '404 — Not Found' : route.kind === 'post' ? `${route.post.title} — desvane.io` : route.kind === 'archive' ? 'archive — desvane.io' : 'desvane.io';
     if (previousRoute.current !== routeKey) {
       main.current?.focus({ preventScroll: true });
@@ -128,7 +121,7 @@ export default function App() {
       <a className="skip-link" href="#content" onClick={(event) => { event.preventDefault(); main.current?.focus(); }}>Pular para o conteúdo</a>
       <div className="layout">
         <div className="writing-column">
-          <header><h1 className="wordmark"><a href="#/" aria-label="desvane.io — início">desvane.io</a></h1></header>
+          <header><h1 className="wordmark"><a href={import.meta.env.BASE_URL} aria-label="desvane.io — início">desvane.io</a></h1></header>
           <main id="content" ref={main} tabIndex={-1}>
             {route.kind === 'index' && (
               <>
