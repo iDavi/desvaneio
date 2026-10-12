@@ -53,7 +53,15 @@ main:focus { outline: none; }
 .unavailable { opacity: .55; text-decoration: underline; text-underline-offset: 2px; }
 
 .image-column { position: sticky; top: 8px; }
-.cover-image { display: block; width: 100%; height: auto; max-height: calc(100svh - 32px); object-fit: cover; object-position: center; }
+.cover-slideshow { position: relative; aspect-ratio: 367 / 490; max-height: calc(100svh - 32px); overflow: hidden; }
+.cover-image { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 0; transition: opacity 1s ease; }
+.cover-image.is-active { opacity: 1; }
+.cover-pause { position: absolute; bottom: 10px; right: 10px; z-index: 1; width: 44px; height: 44px; border: 0; border-radius: 0; background: rgb(26 1 167 / .7); color: var(--ink); font: inherit; font-size: 20px; cursor: pointer; opacity: 0; }
+.cover-slideshow:hover .cover-pause, .cover-slideshow:focus-within .cover-pause { opacity: 1; }
+.cover-pause:focus-visible { outline: 2px solid var(--ink); outline-offset: -4px; }
+
+@media (hover: none) { .cover-pause { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .cover-image { transition: none; } }
 
 .archive h2, .article h2 {
   font-family: 'Trebuchet MS', Arial, sans-serif;
@@ -88,7 +96,7 @@ main:focus { outline: none; }
   .navigation { font-size: clamp(21px, 6vw, 28px); margin-top: 24px; }
   .navigation a, .navigation span { padding: 8px 0; }
   .image-column { position: static; }
-  .cover-image { max-height: none; width: 100%; }
+  .cover-slideshow { max-height: none; }
   .article h2 { font-size: 26px; }
   .article-body { font-size: 16px; }
 }

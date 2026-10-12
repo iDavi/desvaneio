@@ -1,5 +1,6 @@
 import { useEffect, useRef, useSyncExternalStore } from 'react';
 import { posts } from './posts';
+import CoverSlideshow from './CoverSlideshow';
 
 const PAGE_SIZE = 5;
 
@@ -130,7 +131,7 @@ export default function App() {
           </main>
         </div>
         <aside className="image-column" aria-label="Imagem de capa">
-          <img className="cover-image" src={`${import.meta.env.BASE_URL}images/cover.jpg`} alt="Três jovens usando chapéus de bruxa, em uma fotografia de tons suaves." width="367" height="490" fetchPriority="high" />
+          <CoverSlideshow />
         </aside>
       </div>
     </>
