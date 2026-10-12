@@ -14,9 +14,11 @@ function subscribe(callback) {
 
 function useRoute() {
   const hash = useSyncExternalStore(subscribe, () => window.location.hash);
+  const basePath = new URL(import.meta.env.BASE_URL, window.location.origin).pathname;
+  if (window.location.pathname !== basePath && window.location.pathname !== `${basePath}index.html`) return { kind: 'missing' };
   const path = hash.replace(/^#\/?/, '').split('/');
-  if (!path[0]) return { kind: 'index', page: 1 };
-  if (path[0] === 'archive') return { kind: 'archive' };
+  if (!path[0] && path.length === 1) return { kind: 'index', page: 1 };
+  if (path[0] === 'archive' && path.length === 1) return { kind: 'archive' };
   if (path[0] === 'posts' && path.length === 2) {
     const post = posts.find((entry) => entry.slug === path[1]);
     return post ? { kind: 'post', post } : { kind: 'missing' };
@@ -106,13 +108,21 @@ export default function App() {
   const previousRoute = useRef(routeKey);
 
   useEffect(() => {
-    document.title = route.kind === 'post' ? `${route.post.title} — desvane.io` : route.kind === 'archive' ? 'archive — desvane.io' : 'desvane.io';
+    document.title = route.kind === 'missing' ? '404 — Not Found' : route.kind === 'post' ? `${route.post.title} — desvane.io` : route.kind === 'archive' ? 'archive — desvane.io' : 'desvane.io';
     if (previousRoute.current !== routeKey) {
       main.current?.focus({ preventScroll: true });
       window.scrollTo({ top: 0, behavior: 'instant' });
       previousRoute.current = routeKey;
     }
   }, [routeKey, route.kind, route.post]);
+
+  if (route.kind === 'missing') {
+    return (
+      <main className="not-found" ref={main} tabIndex={-1}>
+        <img src={`${import.meta.env.BASE_URL}images/not-found.jpg`} alt="404 — Not Found" width="750" height="600" />
+      </main>
+    );
+  }
 
   return (
     <>
@@ -131,7 +141,6 @@ export default function App() {
             )}
             {route.kind === 'archive' && <Archive />}
             {route.kind === 'post' && <Article post={route.post} />}
-            {route.kind === 'missing' && <section className="article"><h2>Essa página se desvaneceu.</h2><p><a href="#/">← voltar ao início</a></p></section>}
           </main>
         </div>
         <aside className="image-column" aria-label="Imagem de capa">
