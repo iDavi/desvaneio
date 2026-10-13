@@ -2,6 +2,15 @@
   "repository": "iDavi/desvaneio",
   "posts": [
     {
+      "number": 7,
+      "slug": "issue-7",
+      "title": "can I bleed enough to fill up what the engine takes?",
+      "date": "2026-10-12",
+      "createdAt": "2026-10-13T02:16:45Z",
+      "body": "[https://www.youtube.com/watch?v=uLPABr6GrkA](https://www.youtube.com/watch?v=uLPABr6GrkA)",
+      "issueUrl": "https://github.com/iDavi/desvaneio/issues/7"
+    },
+    {
       "number": 6,
       "slug": "issue-6",
       "title": "programmer marshmallow",
