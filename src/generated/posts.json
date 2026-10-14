@@ -2,6 +2,15 @@
   "repository": "iDavi/desvaneio",
   "posts": [
     {
+      "number": 8,
+      "slug": "issue-8",
+      "title": "LLM skeuomorphism",
+      "date": "2026-10-14",
+      "createdAt": "2026-10-14T12:03:21Z",
+      "body": "<img width=\"739\" height=\"415\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/8c992913-8ee3-4cc0-b841-f5f6779f2708\" />\n\nhttps://arxiv.org/pdf/2305.09800\n<img width=\"728\" height=\"619\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/bbaed409-5190-4d64-a07c-4fe88f706399\" />",
+      "issueUrl": "https://github.com/iDavi/desvaneio/issues/8"
+    },
+    {
       "number": 6,
       "slug": "issue-6",
       "title": "programmer marshmallow",
