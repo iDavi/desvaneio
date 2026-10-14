@@ -1,5 +1,45 @@
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/ubuntu/ubuntu-latin-400-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/ubuntu/ubuntu-latin-400-italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/ubuntu/ubuntu-latin-500-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/ubuntu/ubuntu-latin-700-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/ubuntu/ubuntu-latin-700-italic.woff2') format('woff2');
+}
+
 :root {
-  font-family: 'Trebuchet MS', Arial, sans-serif;
+  font-family: 'Ubuntu', Arial, sans-serif;
   color: #f1e6e2;
   background: #1a01a7;
   font-synthesis: none;
@@ -28,7 +68,7 @@ a:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
 
 .wordmark {
   margin: 31px 0 83px;
-  font-family: 'Trebuchet MS', Arial, sans-serif;
+  font-family: 'Ubuntu', Arial, sans-serif;
   font-size: clamp(48px, 7.55vw, 100px);
   font-weight: 400;
   line-height: 1.15;
@@ -48,7 +88,7 @@ main:focus { outline: none; }
   max-width: 392px;
   gap: 18px;
   margin-top: 20px;
-  font-family: 'Trebuchet MS', Arial, sans-serif;
+  font-family: 'Ubuntu', Arial, sans-serif;
   font-size: 28px;
   letter-spacing: 1px;
 }
@@ -67,7 +107,7 @@ main:focus { outline: none; }
 @media (prefers-reduced-motion: reduce) { .cover-image { transition: none; } }
 
 .archive h2, .article h2 {
-  font-family: 'Trebuchet MS', Arial, sans-serif;
+  font-family: 'Ubuntu', Arial, sans-serif;
   font-size: 29px;
   font-weight: 400;
   line-height: 1.25;
@@ -75,7 +115,7 @@ main:focus { outline: none; }
 }
 .archive-year { margin-bottom: 30px; }
 .archive-year h3 { font-size: 18px; font-weight: 400; margin: 0 0 12px; }
-.back-navigation, .article-navigation { margin: 32px 0 16px; font-family: 'Trebuchet MS', Arial, sans-serif; font-size: 20px; }
+.back-navigation, .article-navigation { margin: 32px 0 16px; font-family: 'Ubuntu', Arial, sans-serif; font-size: 20px; }
 .article > time { font-size: 13px; }
 .article h2 { margin: 13px 0 16px; }
 .empty-state { font-size: 14px; margin: 0 0 28px; }
