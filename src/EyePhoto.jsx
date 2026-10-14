@@ -6,7 +6,7 @@ import { prepareIris, composeIris } from './irisMotion';
 export default function EyePhoto({photo,active,enabled,onLoad,pointerHistory}) {
   const image=useRef(null),canvas=useRef(null);
   useEffect(()=>{
-    if(!active||!enabled)return;
+    if(!active||!enabled||!photo.animateEyes)return;
     const capability=window.matchMedia('(any-hover: hover) and (any-pointer: fine)');
     let cleanup=null;
     function attach() {
@@ -68,7 +68,7 @@ export default function EyePhoto({photo,active,enabled,onLoad,pointerHistory}) {
     }
     attach();capability.addEventListener('change',attach);
     return ()=>{capability.removeEventListener('change',attach);cleanup?.();};
-  },[active,enabled,photo.file,pointerHistory]);
+  },[active,enabled,photo.file,photo.animateEyes,pointerHistory]);
   return <div className={`cover-image${active?' is-active':''}`} aria-hidden={!active}>
     <img ref={image} src={`${import.meta.env.BASE_URL}images/${photo.file}`} alt={photo.alt}
       width="367" height="490" fetchPriority={active?'high':'auto'} loading="eager" onLoad={onLoad}/>
