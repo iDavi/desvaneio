@@ -14,7 +14,7 @@ export const coverPhotos = [
   },
   {
     file: 'rita-lee-chapeu-inclinado.jpg',
-    animateEyes: true,
+    animateEyes: false,
     alt: 'Rita Lee olhando para a câmera, com a cabeça inclinada e um grande chapéu azul de maga.',
     source: 'https://br.pinterest.com/pin/252131279135563710/',
   },

@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import { coverPhotos } from '../src/coverPhotos.js';
 import { nextPhoto } from '../src/slideshow.js';
 
-test('only the five selected portraits animate', () => {
+test('only the four selected portraits animate', () => {
   assert.deepEqual(coverPhotos.filter(p => p.animateEyes).map(p => p.file), [
-    'cover.jpg', 'rita-lee-maga.jpg', 'rita-lee-chapeu-inclinado.jpg',
+    'cover.jpg', 'rita-lee-maga.jpg',
     'rita-lee-flor-vermelha.jpg', 'rita-lee-sorriso-aberto.jpg',
   ]);
 });
