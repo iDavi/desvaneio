@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {warpEye,createGazeMotion} from '../src/eyeMotion.js';
+import {createGazeMotion} from '../src/eyeMotion.js';
+import {prepareIris,composeIris} from '../src/irisMotion.js';
 const calibration=JSON.parse(readFileSync(new URL('../src/eyeCalibration.json',import.meta.url)));
 const photos=Object.keys(calibration);
 test('all ten original photos have valid matching calibration and preserve every unmasked pixel in nine directions',()=>{
@@ -17,7 +18,7 @@ test('all ten original photos have valid matching calibration and preserve every
    assert.equal(eye.weights.length,w*h);assert(eye.weights.some(v=>v>0));
    const source=Uint8ClampedArray.from({length:w*h*4},(_,i)=>i%4===3?255:(Math.floor(i/4)*17+i%4*67)%256);
    for(const gaze of [[0,0],[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]]){
-    const output=new Uint8ClampedArray(source.length);warpEye(source,output,eye,gaze);
+    const output=new Uint8ClampedArray(source.length);composeIris(prepareIris(source,eye),output,gaze);
     let changed=0;
     for(let pixel=0;pixel<w*h;pixel++){
      const start=pixel*4;
@@ -45,4 +46,19 @@ test('starts quickly, rests three seconds after the last mouse move, then stops 
 });
 test('disabling or unmounting cancels pending mouse calculations and inactivity timer',()=>{
  const h=harness();h.motion.move([1,1]);h.motion.dispose();assert.equal(h.frames.size,0);assert.equal(h.timers.size,0);h.motion.move([1,1]);h.advance(4000);assert.equal(h.draws.length,0);
+});
+
+test('the iris actually travels toward the left instead of just distorting in place',()=>{
+ const eye=calibration['rita-lee-maga.jpg'].eyes[0];const [x,y,w,h]=eye.bounds;const [cx,cy,rx,ry]=eye.iris;
+ const source=new Uint8ClampedArray(w*h*4);
+ for(let row=0;row<h;row++)for(let col=0;col<w;col++){
+  const k=(row*w+col)*4,dark=Math.hypot((x+col-cx)/rx,(y+row-cy)/ry)<.7;
+  source.set([dark?20:180,dark?20:180,dark?20:180,255],k);
+ }
+ const prepared=prepareIris(source,eye);const moved=new Uint8ClampedArray(source.length);composeIris(prepared,moved,[-1,0]);
+ const center=data=>{let sum=0,n=0;for(let i=0;i<w*h;i++)if(eye.weights[i]>200&&data[i*4]<70){sum+=i%w;n++;}return sum/n;};
+ assert(center(source)-center(moved)>5,'leftward iris displacement should exceed five source pixels');
+});
+test('a new slideshow photo respects the remaining inactivity time',()=>{
+ const h=harness();h.motion.move([-1,0],400);h.advance(350);assert.equal(h.rests,0);h.advance(300);assert.deepEqual(h.draws.at(-1),[0,0]);assert.equal(h.frames.size,0);
 });

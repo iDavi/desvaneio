@@ -19,6 +19,18 @@ CAL={
 'rita-lee-sorriso-aberto.jpg': [([287,390],[330,392],[308,380],[309,400],[309,388],2.5),([386,390],[427,388],[406,379],[406,399],[406,386],2.5)],
 'rita-lee-maga-sentada.jpg': [([78,168],[88,168],[83,165],[83,171],[83,168],0.65),([100,168],[111,168],[106,165],[106,171],[106,167],0.65)]
 }
+IRISES={
+'cover.jpg':[[383,535,11,12],[467,580,9,11]],
+'rita-lee-maga.jpg':[[261,285,15,15],[400,280,14,14]],
+'rita-lee-chapeu-inclinado.jpg':[[225,414,13,12],[318,468,10,12]],
+'rita-lee-mao-chapeu.jpg':[[195,268,9,9],[265,276,7,8]],
+'rita-lee-mutantes-frontal.jpg':[[176,119,5,5],[214,119,5,5]],
+'rita-lee-flor-vermelha.jpg':[[349,281,18,18],[494,284,18,18]],
+'rita-lee-mutantes-de-cima.jpg':[[329,282,8,8],[389,275,7,7]],
+'rita-lee-gato-preto.jpg':[[220,480,10,11],[280,480,11,11]],
+'rita-lee-sorriso-aberto.jpg':[[309,388,12,12],[406,386,12,12]],
+'rita-lee-maga-sentada.jpg':[[83,168,2.6,2.6],[106,167,2.6,2.6]]
+}
 def quad(a,b,c):
  return [((1-t)**2*a[0]+2*t*(1-t)*b[0]+t*t*c[0],(1-t)**2*a[1]+2*t*(1-t)*b[1]+t*t*c[1]) for t in [i/40 for i in range(41)]]
 def dist(x,y,a,b):
@@ -28,7 +40,7 @@ def dist(x,y,a,b):
 result={};sheet=Image.new('RGB',(600,10*125),'#ddd');sd=ImageDraw.Draw(sheet)
 for i,(file,eyes) in enumerate(CAL.items()):
  path=ROOT/'public/images'/file;im=Image.open(path).convert('RGB');entry={'size':list(im.size),'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'eyes':[]};preview=im.copy()
- for left,right,top,bottom,center,motion in eyes:
+ for eye_index,(left,right,top,bottom,center,motion) in enumerate(eyes):
   # A quadratic control at twice the midpoint offset passes through the measured midpoint.
   mid=[(left[k]+right[k])/2 for k in (0,1)]
   up=[2*top[k]-mid[k] for k in (0,1)];down=[2*bottom[k]-mid[k] for k in (0,1)]
@@ -36,14 +48,15 @@ for i,(file,eyes) in enumerate(CAL.items()):
   x=math.floor(min(p[0] for p in outline))-2;y=math.floor(min(p[1] for p in outline))-2
   w=math.ceil(max(p[0] for p in outline))-x+3;h=math.ceil(max(p[1] for p in outline))-y+3
   inside=Image.new('1',im.size);ImageDraw.Draw(inside).polygon(outline,fill=1)
-  feather=max(1.2,min(5,(bottom[1]-top[1])*0.24));rim=min(1.2,feather*.25)
+  feather=max(.5,min(1.2,(bottom[1]-top[1])*.07));rim=min(.7,feather*.5)
   weights=[]
   for py in range(y,y+h):
    for px in range(x,x+w):
     distance=min(dist(px,py,a,b) for a,b in zip(outline,outline[1:]))
     t=max(0,min(1,(distance-rim)/feather)) if inside.getpixel((px,py)) else 0
     weights.append(round(255*t*t*(3-2*t)))
-  entry['eyes'].append({'bounds':[x,y,w,h],'center':center,'maxOffset':[motion,motion],'weights':weights})
+  iris=IRISES[file][eye_index]
+  entry['eyes'].append({'bounds':[x,y,w,h],'center':iris[:2],'iris':iris,'maxOffset':[round(iris[2]*.55,2),round(iris[3]*.28,2)],'weights':weights})
   mask=Image.new('L',(w,h));mask.putdata(weights);preview.paste(Image.new('RGB',(w,h),'red'),(x,y),mask.point(lambda v:v//2))
  result[file]=entry
  centers=[e['center'] for e in entry['eyes']];x0=min(p[0] for p in centers)-40;y0=min(p[1] for p in centers)-25;x1=max(p[0] for p in centers)+40;y1=max(p[1] for p in centers)+25
