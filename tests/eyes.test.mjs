@@ -16,7 +16,7 @@ test('all ten original photos have valid matching calibration and preserve every
   for(const eye of config.eyes){
    const [x,y,w,h]=eye.bounds;assert(x>=0&&y>=0&&x+w<=config.size[0]&&y+h<=config.size[1]);
    assert.equal(eye.weights.length,w*h);assert(eye.weights.some(v=>v>0));
-   const source=Uint8ClampedArray.from({length:w*h*4},(_,i)=>i%4===3?255:(Math.floor(i/4)*17+i%4*67)%256);
+   const source=Uint8ClampedArray.from({length:w*h*4},(_,i)=>i%4===3?255:(Math.floor(i/4)**2*17+i%4*67)%256);
    for(const gaze of [[0,0],[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]]){
     const output=new Uint8ClampedArray(source.length);composeIris(prepareIris(source,eye),output,gaze);
     let changed=0;
@@ -61,4 +61,14 @@ test('the iris actually travels toward the left instead of just distorting in pl
 });
 test('a new slideshow photo respects the remaining inactivity time',()=>{
  const h=harness();h.motion.move([-1,0],400);h.advance(350);assert.equal(h.rests,0);h.advance(300);assert.deepEqual(h.draws.at(-1),[0,0]);assert.equal(h.frames.size,0);
+});
+test('the sitting portrait targets pupils below the glasses frame',()=>{
+ const eyes=calibration['rita-lee-maga-sentada.jpg'].eyes;
+ for(const eye of eyes){
+  const [x,y,w,h]=eye.bounds;
+  const weight=(px,py)=>px<x||py<y||px>=x+w||py>=y+h?0:eye.weights[(py-y)*w+px-x];
+  assert.equal(weight(eye.center[0],168),0,'upper glasses frame must stay fixed');
+  assert(weight(eye.center[0],172)>100,'motion must reach the pupil region');
+  assert.equal(eye.strategy,'flow','do not invent iris detail in this tiny photograph');
+ }
 });

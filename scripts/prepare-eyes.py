@@ -1,4 +1,4 @@
-"""Calibrated pixel-warp weights for the ten original photos; Python + Pillow.
+"""Calibrated eye openings and iris regions for the ten original photos; Python + Pillow.
 Run manually after changing calibration. CI uses the committed JSON.
 Left/right below refer to image coordinates, not anatomy.
 """
@@ -17,19 +17,19 @@ CAL={
 'rita-lee-mutantes-de-cima.jpg': [([315,284],[344,282],[330,276],[331,290],[329,282],1.6),([377,276],[404,272],[389,269],[390,281],[388,275],1.4)],
 'rita-lee-gato-preto.jpg': [([199,481],[233,483],[216,472],[217,489],[220,480],1.8),([257,481],[294,480],[276,471],[276,490],[280,480],1.8)],
 'rita-lee-sorriso-aberto.jpg': [([287,390],[330,392],[308,380],[309,400],[309,388],2.5),([386,390],[427,388],[406,379],[406,399],[406,386],2.5)],
-'rita-lee-maga-sentada.jpg': [([78,168],[88,168],[83,165],[83,171],[83,168],0.65),([100,168],[111,168],[106,165],[106,171],[106,167],0.65)]
+'rita-lee-maga-sentada.jpg': [([79,173],[90,173],[84,170],[84,175.5],[84,172],0.65),([102,172],[113,172],[108,169],[108,174.5],[108,171.5],0.65)]
 }
 IRISES={
-'cover.jpg':[[383,535,11,12],[467,580,9,11]],
+'cover.jpg':[[378,531,13,13],[465,577,11,12]],
 'rita-lee-maga.jpg':[[261,285,15,15],[400,280,14,14]],
-'rita-lee-chapeu-inclinado.jpg':[[225,414,13,12],[318,468,10,12]],
-'rita-lee-mao-chapeu.jpg':[[195,268,9,9],[265,276,7,8]],
+'rita-lee-chapeu-inclinado.jpg':[[221,408,12,13],[315,462,12,13]],
+'rita-lee-mao-chapeu.jpg':[[194,264,8,8],[263,268,8,8]],
 'rita-lee-mutantes-frontal.jpg':[[176,119,5,5],[214,119,5,5]],
-'rita-lee-flor-vermelha.jpg':[[349,281,18,18],[494,284,18,18]],
-'rita-lee-mutantes-de-cima.jpg':[[329,282,8,8],[389,275,7,7]],
-'rita-lee-gato-preto.jpg':[[220,480,10,11],[280,480,11,11]],
-'rita-lee-sorriso-aberto.jpg':[[309,388,12,12],[406,386,12,12]],
-'rita-lee-maga-sentada.jpg':[[83,168,2.6,2.6],[106,167,2.6,2.6]]
+'rita-lee-flor-vermelha.jpg':[[348,278,18,18],[495,280,18,18]],
+'rita-lee-mutantes-de-cima.jpg':[[327,282,8,8],[392,276,7,7]],
+'rita-lee-gato-preto.jpg':[[223,479,10,11],[282,477,11,11]],
+'rita-lee-sorriso-aberto.jpg':[[309,384,12,12],[405,381,13,13]],
+'rita-lee-maga-sentada.jpg':[[84,172,2.4,2.4],[108,171.5,2.4,2.4]]
 }
 def quad(a,b,c):
  return [((1-t)**2*a[0]+2*t*(1-t)*b[0]+t*t*c[0],(1-t)**2*a[1]+2*t*(1-t)*b[1]+t*t*c[1]) for t in [i/40 for i in range(41)]]
@@ -56,7 +56,20 @@ for i,(file,eyes) in enumerate(CAL.items()):
     t=max(0,min(1,(distance-rim)/feather)) if inside.getpixel((px,py)) else 0
     weights.append(round(255*t*t*(3-2*t)))
   iris=IRISES[file][eye_index]
-  entry['eyes'].append({'bounds':[x,y,w,h],'center':iris[:2],'iris':iris,'maxOffset':[round(iris[2]*.55,2),round(iris[3]*.28,2)],'weights':weights})
+  strategy='iris' if file in {'rita-lee-maga.jpg','rita-lee-flor-vermelha.jpg','rita-lee-sorriso-aberto.jpg'} else 'flow'
+  gain=.45 if file in {'cover.jpg','rita-lee-chapeu-inclinado.jpg','rita-lee-mao-chapeu.jpg','rita-lee-mutantes-de-cima.jpg'} else .55
+  bias=[round((left[0]+right[0])/2-iris[0],2),0]
+  if strategy=='flow':
+   gain=.48
+   if file in {'rita-lee-mutantes-frontal.jpg','rita-lee-maga-sentada.jpg'}:gain=.3
+   feather=max(1.5,(bottom[1]-top[1])*.3)
+   weights=[]
+   for py in range(y,y+h):
+    for px in range(x,x+w):
+     distance=min(dist(px,py,a,b) for a,b in zip(outline,outline[1:]))
+     t=max(0,min(1,(distance-.6)/feather)) if inside.getpixel((px,py)) else 0
+     weights.append(round(255*t*t*(3-2*t)))
+  entry['eyes'].append({'bounds':[x,y,w,h],'center':iris[:2],'iris':iris,'strategy':strategy,'gazeBias':bias,'maxOffset':[round(iris[2]*gain,2),round(iris[3]*.24,2)],'weights':weights})
   mask=Image.new('L',(w,h));mask.putdata(weights);preview.paste(Image.new('RGB',(w,h),'red'),(x,y),mask.point(lambda v:v//2))
  result[file]=entry
  centers=[e['center'] for e in entry['eyes']];x0=min(p[0] for p in centers)-40;y0=min(p[1] for p in centers)-25;x1=max(p[0] for p in centers)+40;y1=max(p[1] for p in centers)+25
