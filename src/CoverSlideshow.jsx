@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { coverPhotos as photos } from './coverPhotos';
+import EyePhoto from './EyePhoto';
 
-export default function CoverSlideshow() {
+export default function CoverSlideshow({ visible = true }) {
   const [active, setActive] = useState(() => Math.floor(Math.random() * photos.length));
   const [loaded, setLoaded] = useState(() => photos.map(() => false));
   const [paused, setPaused] = useState(false);
@@ -31,16 +32,11 @@ export default function CoverSlideshow() {
   return (
     <div className="cover-slideshow" role="group" aria-label="Fotos de Rita Lee vestida de maga">
       {photos.map((photo, index) => (
-        <img
+        <EyePhoto
           key={photo.file}
-          className={`cover-image${active === index ? ' is-active' : ''}`}
-          src={`${import.meta.env.BASE_URL}images/${photo.file}`}
-          alt={photo.alt}
-          aria-hidden={active !== index}
-          width="367"
-          height="490"
-          fetchPriority={active === index ? 'high' : 'auto'}
-          loading="eager"
+          photo={photo}
+          active={active === index}
+          enabled={visible && !paused && !reducedMotion}
           onLoad={() => setLoaded((current) => current.map((ready, i) => i === index || ready))}
         />
       ))}

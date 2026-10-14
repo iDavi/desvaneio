@@ -115,3 +115,7 @@ main:focus { outline: none; }
   .article h2 { font-size: 26px; }
   .article-body { font-size: 16px; }
 }
+
+.cover-image > img, .eye-canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.eye-canvas { pointer-events: none; }
+.eye-canvas[hidden] { display: none; }
