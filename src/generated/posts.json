@@ -2,6 +2,15 @@
   "repository": "iDavi/desvaneio",
   "posts": [
     {
+      "number": 13,
+      "slug": "issue-13",
+      "title": "good bye",
+      "date": "2026-10-17",
+      "createdAt": "2026-10-17T04:13:30Z",
+      "body": "goodbye!\nsee you soon!!\n\n<img width=\"720\" height=\"711\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/1745cf03-0557-449a-8597-4d5ec767bac7\" />",
+      "issueUrl": "https://github.com/iDavi/desvaneio/issues/13"
+    },
+    {
       "number": 12,
       "slug": "issue-12",
       "title": "🍓🍓🍓🍓",
