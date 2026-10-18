@@ -12,8 +12,8 @@ export default function EyePhoto({photo,active,enabled,onLoad,pointerHistory}) {
     let cleanup=null;
     function attach() {
       cleanup?.();cleanup=null;
-      // No canvas setup, timers, or mouse tracking on devices without a mouse.
-      if(!capability.matches){pointerHistory.current=null;return;}
+      // Blinking runs on touch devices too; only gaze tracking needs a mouse.
+      if(!capability.matches)pointerHistory.current=null;
       const config=calibration[photo.file],canvasElement=canvas.current;
       let context=null,patches=null,motion=null,blink=null,gaze=[0,0],closure=0;
       function render() {
@@ -72,8 +72,8 @@ export default function EyePhoto({photo,active,enabled,onLoad,pointerHistory}) {
       image.current.addEventListener('load',resume);
       resume();
       const previous=pointerHistory.current;
-      if(previous){const remaining=3000-(performance.now()-previous.time);if(remaining>0)track(previous.x,previous.y,remaining);}
-      window.addEventListener('pointermove',move,{passive:true});
+      if(capability.matches&&previous){const remaining=3000-(performance.now()-previous.time);if(remaining>0)track(previous.x,previous.y,remaining);}
+      if(capability.matches)window.addEventListener('pointermove',move,{passive:true});
       window.addEventListener('blur',reset);
       document.addEventListener('visibilitychange',visibility);
       window.addEventListener('focus',resume);
