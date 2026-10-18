@@ -24,8 +24,8 @@ test('word positions repeat deterministically and use distinct safe cells',()=>{
   const cells=new Set();
   for(let w=0;w<9;w++){
    const pos=wordPosition(p,w);assert.deepEqual(pos,wordPosition(p,w));
-   assert(pos.x>=14&&pos.x<=86);assert(pos.y>=16&&pos.y<=74);
-   cells.add(`${Math.round((pos.x-18)/32)},${Math.round((pos.y-20)/25)}`);
+   assert(pos.x>=14&&pos.x<=86);assert(pos.y>=26&&pos.y<=74);
+   cells.add(`${Math.round((pos.x-18)/32)},${Math.round((pos.y-30)/20)}`);
   }
   assert.equal(cells.size,9);
  }

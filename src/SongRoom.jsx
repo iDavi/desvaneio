@@ -98,15 +98,19 @@ export default function SongRoom() {
         <p className="sr-only">{lyrics?.words.filter(word => word.visible).map(word => word.text).join(' ')}</p>
       </>}
       {view.bar && <div className="song-controls">
-        <span className="song-art" aria-hidden="true" />
-        <span className="song-credit"><strong>CSIRAC</strong><span>Ninajirachi</span></span>
-        <button type="button" onClick={toggle} aria-label={playing ? 'Pausar CSIRAC' : 'Tocar CSIRAC'}>
-          {playing ? 'Ⅱ' : '▶'}
-        </button>
-        <input type="range" min="0" max={duration || 201.931} step="0.1" value={time}
-          aria-label="Posição da música" onChange={event => {
-            const value = Number(event.target.value); audio.current.currentTime = value; setTime(value);
-          }} />
+        <div className="song-controls-inner">
+          <span className="song-art" aria-hidden="true" />
+          <span className="song-credit"><strong>CSIRAC</strong><span>Ninajirachi</span></span>
+          <button type="button" onClick={toggle} aria-label={playing ? 'Pausar CSIRAC' : 'Tocar CSIRAC'}>
+            {playing ? 'Ⅱ' : '▶'}
+          </button>
+          <span className="song-progress" style={{ '--song-progress': `${Math.min(100, time / (duration || 201.931) * 100)}%` }}>
+            <input type="range" min="0" max={duration || 201.931} step="0.1" value={time}
+              aria-label="Posição da música" onChange={event => {
+                const value = Number(event.target.value); audio.current.currentTime = value; setTime(value);
+              }} />
+          </span>
+        </div>
         {error && <span className="song-error" role="status">Toque para tentar novamente.</span>}
       </div>}
     </section>
