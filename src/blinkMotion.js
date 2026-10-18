@@ -30,7 +30,7 @@ export function composeBlink(source, output, eye, amount) {
 // Sleep between blinks; request frames only for the short lid movement.
 export function createBlinkMotion({draw, requestFrame, cancelFrame, setTimer, clearTimer, random = Math.random}) {
   let timer = null, frame = null, start = null, disposed = false;
-  function schedule() { timer = setTimer(() => { timer = null; frame = requestFrame(tick); }, 1800 + random() * 2200); }
+  function schedule() { timer = setTimer(() => { timer = null; frame = requestFrame(tick); }, 1000 + random() * 1400); }
   function tick(time) {
     frame = null;
     if (start === null) start = time;

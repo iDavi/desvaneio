@@ -9,7 +9,7 @@ test('a blink closes and reopens, sleeps between blinks, and cancels on disposal
   requestFrame:cb=>{frames.set(++id,cb);return id;},cancelFrame:id=>frames.delete(id)});
  const frame=time=>{const callbacks=[...frames.values()];frames.clear();callbacks.forEach(cb=>cb(time));};
  blink.start();blink.start();assert.equal(timers.size,1);assert.equal(frames.size,0);
- const timer=[...timers.values()][0];assert.equal(timer.ms,1800);timers.clear();timer.cb();
+ const timer=[...timers.values()][0];assert.equal(timer.ms,1000);timers.clear();timer.cb();
  frame(0);frame(90);assert.equal(draws.at(-1),1);frame(120);assert.equal(draws.at(-1),1);
  frame(260);assert.equal(draws.at(-1),0);assert.equal(frames.size,0);assert.equal(timers.size,1);
  blink.stop();assert.equal(timers.size,0);blink.start();assert.equal(timers.size,1);
