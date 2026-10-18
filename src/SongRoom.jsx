@@ -19,6 +19,7 @@ export default function SongRoom() {
   const preloadedCats = useRef(new Map());
   const [view, setView] = useState({ bar: false, cats: false, top: 0, bottom: 0 });
   const [playing, setPlaying] = useState(false);
+  const [hasPlayed, setHasPlayed] = useState(false);
   const [time, setTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [error, setError] = useState(false);
@@ -127,7 +128,7 @@ export default function SongRoom() {
   return (
     <section ref={room} className="song-room" aria-label="CSIRAC — Ninajirachi">
       <audio ref={audio} preload="none" src={`${import.meta.env.BASE_URL}audio/csirac.m4a`}
-        onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)}
+        onPlay={() => { setPlaying(true); setHasPlayed(true); }} onPause={() => setPlaying(false)}
         onEnded={() => { setPlaying(false); setTime(audio.current.currentTime); }}
         onLoadedMetadata={() => setDuration(audio.current.duration)}
         onSeeked={() => setTime(audio.current.currentTime)} onError={() => setError(true)} />
@@ -146,7 +147,7 @@ export default function SongRoom() {
         <img src={`https://http.cat/${CAT_CODES[catIndex]}.jpg`} alt="" />
       </div>}
       {view.bar && <div className="song-controls">
-        <div className="song-controls-inner">
+        <div className={`song-controls-inner${hasPlayed ? '' : ' is-awaiting-playback'}`}>
           <span className="song-art" aria-hidden="true" />
           <span className="song-credit"><strong>CSIRAC</strong><span>Ninajirachi</span></span>
           <button ref={playButton} type="button" onClick={toggle} aria-label={playing ? 'Pausar CSIRAC' : 'Tocar CSIRAC'}>

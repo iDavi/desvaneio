@@ -171,6 +171,7 @@ main:focus { outline: none; }
 .song-controls { position: fixed; z-index: 5; bottom: 0; left: 0; right: 0; min-height: var(--song-bar-height); border-top: 1px solid var(--red); background: var(--background); color: var(--ink); animation: song-controls-enter .2s ease-out both; }
 .song-controls-inner { display: grid; grid-template-columns: 52px minmax(0, 1fr) 48px; grid-template-rows: 36px 16px; column-gap: 18px; align-content: center; align-items: center; min-height: calc(var(--song-bar-height) - 1px); max-width: 1440px; margin: 0 auto; padding: 0 4% env(safe-area-inset-bottom); }
 .song-art { grid-row: 1 / 3; display: block; width: 52px; height: 52px; background: url('/images/csirac-cover.jpg') center / cover no-repeat; }
+.song-controls-inner.is-awaiting-playback .song-art, .song-controls-inner.is-awaiting-playback .song-credit { visibility: hidden; }
 @keyframes song-controls-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes song-words-enter { from { opacity: 0; } to { opacity: 1; } }
 .song-credit { display: flex; flex-direction: column; min-width: 0; line-height: 1.15; }
