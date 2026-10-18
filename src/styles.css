@@ -161,13 +161,13 @@ main:focus { outline: none; }
 .eye-canvas[hidden] { display: none; }
 
 /* The song bar stays at the viewport bottom once 20% of the empty room is visible. */
-.song-room { --song-bar-height: 86px; --song-word-size: clamp(22px, 4vw, 52px); position: relative; height: 100vh; height: 100dvh; border-top: 2px solid var(--red); }
+.song-room { --song-bar-height: 98px; --song-word-size: clamp(22px, 4vw, 52px); position: relative; height: 100vh; height: 100dvh; border-top: 2px solid var(--red); }
 .song-words { position: fixed; left: 0; right: 0; z-index: 4; overflow: hidden; color: var(--red); pointer-events: none; animation: song-words-enter .18s ease-out both; }
 .song-word { position: absolute; transform: translate(-50%, -50%); font-size: min(var(--song-word-size), calc(var(--visible-height) / 3)); line-height: 1.15; font-weight: 400; white-space: nowrap; }
 .song-words.is-row { display: flex; align-content: center; justify-content: center; flex-wrap: wrap; gap: .2em .35em; padding: 0 9%; font-size: var(--song-word-size); }
 .song-words.is-row .song-word { position: static; transform: none; }
 .song-controls { position: fixed; z-index: 5; bottom: 0; left: 0; right: 0; min-height: var(--song-bar-height); border-top: 1px solid var(--red); background: var(--background); color: var(--ink); animation: song-controls-enter .2s ease-out both; }
-.song-controls-inner { display: grid; grid-template-columns: 52px minmax(0, 1fr) 48px; grid-template-rows: 36px 16px; column-gap: 18px; align-items: center; max-width: 1440px; margin: 0 auto; padding: 12px 4% max(12px, env(safe-area-inset-bottom)); }
+.song-controls-inner { display: grid; grid-template-columns: 52px minmax(0, 1fr) 48px; grid-template-rows: 36px 16px; column-gap: 18px; align-content: center; align-items: center; min-height: calc(var(--song-bar-height) - 1px); max-width: 1440px; margin: 0 auto; padding: 0 4% env(safe-area-inset-bottom); }
 .song-art { grid-row: 1 / 3; display: block; width: 52px; height: 52px; background: url('/images/csirac-cover.jpg') center / cover no-repeat; }
 @keyframes song-controls-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes song-words-enter { from { opacity: 0; } to { opacity: 1; } }
@@ -188,8 +188,8 @@ main:focus { outline: none; }
 .song-error { position: absolute; right: 4%; bottom: calc(var(--song-bar-height) + 8px); padding: 6px; background: var(--background); color: var(--ink); font-size: 12px; }
 @media (prefers-reduced-motion: reduce) { .song-controls, .song-words { animation: none; } }
 @media (max-width: 680px) {
-  .song-room { --song-bar-height: 76px; --song-word-size: clamp(18px, 5vw, 32px); }
-  .song-controls-inner { grid-template-columns: 44px minmax(0, 1fr) 44px; grid-template-rows: 30px 14px; column-gap: 12px; padding: 10px 6% max(10px, env(safe-area-inset-bottom)); }
+  .song-room { --song-bar-height: 88px; --song-word-size: clamp(18px, 5vw, 32px); }
+  .song-controls-inner { grid-template-columns: 44px minmax(0, 1fr) 44px; grid-template-rows: 30px 14px; column-gap: 12px; padding-inline: 6%; }
   .song-art { width: 44px; height: 44px; }
   .song-credit strong { font-size: 17px; }
   .song-credit span { font-size: 11px; }
