@@ -50,7 +50,9 @@ export default function PlayPrompt({ buttonRef, zoneTop, zoneBottom, reducedMoti
   if (!position) return null;
   const { width, height, labelLeft, labelBottom, labelWidth, maxVisibleLines, centerX: x, centerY: y, radiusX: rx, radiusY: ry, startX: sx, startY: sy, endX: ex, endY: ey } = position;
   const circle = `M ${x-rx+3} ${y-5} C ${x-rx-4} ${y-ry+5}, ${x-9} ${y-ry-5}, ${x+10} ${y-ry+1} C ${x+rx+3} ${y-ry+7}, ${x+rx+6} ${y+ry-10}, ${x+rx-3} ${y+ry-2} C ${x+5} ${y+ry+7}, ${x-rx-9} ${y+ry-3}, ${x-rx+3} ${y-5}`;
-  const arrow = `M ${sx} ${sy} C ${sx + Math.max(52, width*.13)} ${sy-35}, ${ex - Math.max(62, width*.17)} ${ey-105}, ${ex} ${ey}`;
+  const arrow = width <= 680
+    ? `M ${sx} ${sy} C ${sx+12} ${sy+12}, ${ex-13} ${ey-15}, ${ex} ${ey}`
+    : `M ${sx} ${sy} C ${sx + Math.max(52, width*.13)} ${sy-35}, ${ex - Math.max(62, width*.17)} ${ey-105}, ${ex} ${ey}`;
 
   return createPortal(
     <div className="song-play-prompt" aria-hidden="true"
