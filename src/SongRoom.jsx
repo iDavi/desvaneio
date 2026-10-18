@@ -5,7 +5,6 @@ import { visibleLyrics } from './songTimeline';
 export default function SongRoom() {
   const room = useRef(null);
   const audio = useRef(null);
-  const userStarted = useRef(false);
   const userPaused = useRef(false);
   const [view, setView] = useState({ bar: false, top: 0, bottom: 0 });
   const [playing, setPlaying] = useState(false);
@@ -50,15 +49,23 @@ export default function SongRoom() {
 
   useEffect(() => {
     const media = audio.current;
-    const update = () => {
+    const update = (event) => {
+      if (event?.target?.closest?.('.song-controls')) return;
       if (!view.bar || document.hidden) { media.pause(); return; }
-      if (userStarted.current && !userPaused.current && !media.ended) {
-        media.play().catch(() => setPlaying(false));
+      if (media.paused && !userPaused.current && !media.ended) {
+        media.play().catch(() => { if (media.paused) setPlaying(false); });
       }
     };
     update();
     document.addEventListener('visibilitychange', update);
-    return () => { document.removeEventListener('visibilitychange', update); media.pause(); };
+    document.addEventListener('pointerdown', update);
+    document.addEventListener('keydown', update);
+    return () => {
+      document.removeEventListener('visibilitychange', update);
+      document.removeEventListener('pointerdown', update);
+      document.removeEventListener('keydown', update);
+      media.pause();
+    };
   }, [view.bar]);
 
   useEffect(() => {
@@ -72,7 +79,6 @@ export default function SongRoom() {
   async function toggle() {
     const media = audio.current;
     if (!media.paused) { userPaused.current = true; media.pause(); return; }
-    userStarted.current = true;
     userPaused.current = false;
     if (media.ended) media.currentTime = 0;
     try { await media.play(); setError(false); } catch { setError(true); }

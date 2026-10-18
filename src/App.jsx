@@ -140,7 +140,7 @@ export default function App() {
           <CoverSlideshow visible={route.kind !== 'post'} />
         </aside>
       </div>
-      {route.kind === 'index' && <SongRoom key={routeKey} />}
+      <SongRoom key={routeKey} />
     </>
   );
 }
