@@ -3,21 +3,33 @@ import { createPortal } from 'react-dom';
 
 const RAINBOW = ['#ff6363', '#ffae50', '#fff451', '#5aff65', '#5ffaff', '#9aaeff', '#ec90ff'];
 const CLICKS = [
-  'click!!', 'click!!!!!', 'click!!1', 'click!!', 'click!!', 'click!!!',
-  'click!!', 'click!!!!!', 'click!!', 'click!!1', 'click!!', 'click!!!',
-  'click!!', 'click!!', 'click!!!!!', 'click!!', 'click!!1', 'click!!',
+  'click!!', 'click!!!!!', 'click!!1', 'click!!', 'CLICK!!!', 'click!!',
+  'click!?!', 'click!!', 'click!!!!!!', 'click!!', 'click!!1', 'click!!!',
+  'click!!', 'CLICK!!', 'click!!!!!', 'click!!', 'click!!!1', 'click!!',
 ];
+const KEY_DELAYS = [92, 48, 71, 43, 118, 36, 58, 29, 47, 65, 34, 27];
+const BURSTS = [1, .72, .84, 1.18, .68, .91, .63, 1.05];
+const LINE_PAUSES = [360, 95, 70, 510, 120, 55, 280, 75, 420, 65, 180, 570];
 
 export default function PlayPrompt({ buttonRef, zoneTop, zoneBottom, reducedMotion }) {
   const [position, setPosition] = useState(null);
-  const [clickCount, setClickCount] = useState(1);
+  const [typing, setTyping] = useState({ line: 0, chars: 0 });
   const [colorStep, setColorStep] = useState(0);
 
   useEffect(() => {
-    if (clickCount >= CLICKS.length) return;
-    const timer = setTimeout(() => setClickCount(count => count + 1), 700);
+    const click = CLICKS[typing.line % CLICKS.length];
+    const isTyping = typing.chars < click.length;
+    const delay = reducedMotion ? 700
+      : isTyping
+        ? typing.line === 0 && typing.chars === 0 ? 240
+          : Math.round(KEY_DELAYS[(typing.line * 3 + typing.chars) % KEY_DELAYS.length] * BURSTS[typing.line % BURSTS.length])
+        : LINE_PAUSES[typing.line % LINE_PAUSES.length];
+    const timer = setTimeout(() => setTyping(({ line, chars }) =>
+      reducedMotion || chars >= CLICKS[line % CLICKS.length].length
+        ? { line: line + 1, chars: 0 }
+        : { line, chars: chars + 1 }), delay);
     return () => clearTimeout(timer);
-  }, [clickCount]);
+  }, [typing, reducedMotion]);
 
   useEffect(() => {
     if (reducedMotion) return;
@@ -46,7 +58,7 @@ export default function PlayPrompt({ buttonRef, zoneTop, zoneBottom, reducedMoti
     const startY = mobile
       ? zoneBottom - Math.min(105, Math.max(22, zoneBottom - zoneTop - 18))
       : labelBottom - 25;
-    const maxVisibleLines = Math.max(1, Math.floor((labelBottom - zoneTop - 8) / (width <= 680 ? 17 : 20)));
+    const maxVisibleLines = Math.max(1, Math.floor((labelBottom - zoneTop - 8) / (width <= 680 ? 18 : 20)));
     setPosition({ width, height, labelLeft, labelBottom, labelWidth, maxVisibleLines, centerX, centerY, radiusX, radiusY, startX, startY, endX, endY });
   }, [buttonRef, zoneTop, zoneBottom]);
 
@@ -59,6 +71,16 @@ export default function PlayPrompt({ buttonRef, zoneTop, zoneBottom, reducedMoti
   const arrowHead = width <= 680
     ? `M ${ex-12} ${ey-13} Q ${ex-3} ${ey-5}, ${ex} ${ey} Q ${ex+5} ${ey-11}, ${ex+9} ${ey-16}`
     : `M ${ex-17} ${ey-15} Q ${ex-6} ${ey-7}, ${ex} ${ey} Q ${ex-10} ${ey+3}, ${ex-20} ${ey+13}`;
+  const currentVisible = reducedMotion || typing.chars > 0;
+  const firstLine = Math.max(0, typing.line + Number(currentVisible) - maxVisibleLines);
+  const visibleClicks = [];
+  for (let line = firstLine; line < typing.line; line++) {
+    visibleClicks.push({ line, text: CLICKS[line % CLICKS.length] });
+  }
+  if (currentVisible) {
+    const click = CLICKS[typing.line % CLICKS.length];
+    visibleClicks.push({ line: typing.line, text: reducedMotion ? click : click.slice(0, typing.chars) });
+  }
 
   return createPortal(
     <div className="song-play-prompt" aria-hidden="true"
@@ -70,8 +92,8 @@ export default function PlayPrompt({ buttonRef, zoneTop, zoneBottom, reducedMoti
         <path d={`M ${x-rx+8} ${y-ry+1} Q ${x-4} ${y-ry-10}, ${x+rx-4} ${y-ry+6}`} className="song-play-prompt-circle song-play-prompt-sketch" />
       </svg>
       <div className="song-play-prompt-note" style={{ left: labelLeft, bottom: height - labelBottom, width: labelWidth }}>
-        {CLICKS.slice(0, Math.min(clickCount, maxVisibleLines)).map((click, index) =>
-          <span key={index} style={{ color: RAINBOW[(colorStep + index + 4) % RAINBOW.length] }}>{click}</span>)}
+        {visibleClicks.map(({ line, text: click }) =>
+          <span key={line} style={{ color: RAINBOW[(colorStep + line + 4) % RAINBOW.length] }}>{click}</span>)}
       </div>
     </div>,
     document.body,
