@@ -2,6 +2,7 @@ import { useEffect, useRef, useSyncExternalStore } from 'react';
 import PostBody from './PostBody';
 import postData from './generated/posts.json';
 import CoverSlideshow from './CoverSlideshow';
+import SongRoom from './SongRoom';
 import { resolveRoute } from './route';
 
 const posts = postData.posts;
@@ -139,6 +140,7 @@ export default function App() {
           <CoverSlideshow visible={route.kind !== 'post'} />
         </aside>
       </div>
+      {route.kind === 'index' && <SongRoom key={routeKey} />}
     </>
   );
 }
