@@ -2,6 +2,15 @@
   "repository": "iDavi/desvaneio",
   "posts": [
     {
+      "number": 16,
+      "slug": "issue-16",
+      "title": "ninajirachi!",
+      "date": "2026-10-18",
+      "createdAt": "2026-10-18T20:09:12Z",
+      "body": "just scroll down",
+      "issueUrl": "https://github.com/iDavi/desvaneio/issues/16"
+    },
+    {
       "number": 15,
       "slug": "issue-15",
       "title": "Sorry",
