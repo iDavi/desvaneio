@@ -166,6 +166,8 @@ main:focus { outline: none; }
 .song-word { position: absolute; transform: translate(-50%, -50%); font-size: min(var(--song-word-size), calc(var(--visible-height) / 3)); line-height: 1.15; font-weight: 400; white-space: nowrap; }
 .song-words.is-row { display: flex; align-content: center; justify-content: center; flex-wrap: wrap; gap: .2em .35em; padding: 0 9%; font-size: var(--song-word-size); }
 .song-words.is-row .song-word { position: static; transform: none; }
+.song-cats { position: fixed; left: 0; right: 0; z-index: 4; display: grid; place-items: center; overflow: hidden; pointer-events: none; }
+.song-cats img { display: block; width: min(50vw, 360px); max-height: calc(100% - 24px); object-fit: contain; }
 .song-controls { position: fixed; z-index: 5; bottom: 0; left: 0; right: 0; min-height: var(--song-bar-height); border-top: 1px solid var(--red); background: var(--background); color: var(--ink); animation: song-controls-enter .2s ease-out both; }
 .song-controls-inner { display: grid; grid-template-columns: 52px minmax(0, 1fr) 48px; grid-template-rows: 36px 16px; column-gap: 18px; align-content: center; align-items: center; min-height: calc(var(--song-bar-height) - 1px); max-width: 1440px; margin: 0 auto; padding: 0 4% env(safe-area-inset-bottom); }
 .song-art { grid-row: 1 / 3; display: block; width: 52px; height: 52px; background: url('/images/csirac-cover.jpg') center / cover no-repeat; }
@@ -186,9 +188,18 @@ main:focus { outline: none; }
 .song-controls input::-webkit-slider-thumb { width: 8px; height: 8px; margin-top: 4px; appearance: none; border: 0; border-radius: 0; background: var(--red); }
 .song-controls input::-moz-range-thumb { width: 8px; height: 8px; border: 0; border-radius: 0; background: var(--red); }
 .song-error { position: absolute; right: 4%; bottom: calc(var(--song-bar-height) + 8px); padding: 6px; background: var(--background); color: var(--ink); font-size: 12px; }
+.song-play-prompt { position: fixed; inset: 0; z-index: 100; pointer-events: none; }
+.song-play-prompt svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.song-play-prompt path { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.song-play-prompt-arrow { stroke: var(--prompt-arrow-color); }
+.song-play-prompt-circle { stroke: var(--prompt-circle-color); }
+.song-play-prompt-sketch { stroke-width: 2.5 !important; opacity: .8; }
+.song-play-prompt-note { position: absolute; display: flex; flex-direction: column; align-items: flex-start; gap: 1px; font: 18px/1.05 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: nowrap; }
 @media (prefers-reduced-motion: reduce) { .song-controls, .song-words { animation: none; } }
 @media (max-width: 680px) {
   .song-room { --song-bar-height: 88px; --song-word-size: clamp(18px, 5vw, 32px); }
+  .song-cats img { width: min(72vw, 300px); }
+  .song-play-prompt-note { font-size: 16px; }
   .song-controls-inner { grid-template-columns: 44px minmax(0, 1fr) 44px; grid-template-rows: 30px 14px; column-gap: 12px; padding-inline: 6%; }
   .song-art { width: 44px; height: 44px; }
   .song-credit strong { font-size: 17px; }
