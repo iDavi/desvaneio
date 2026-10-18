@@ -37,12 +37,15 @@ export default function PlayPrompt({ buttonRef, zoneTop, zoneBottom, reducedMoti
     const centerY = rect.top + rect.height / 2;
     const radiusX = rect.width / 2 + 15;
     const radiusY = rect.height / 2 + 13;
-    const endX = centerX - radiusX - 7;
-    const endY = centerY - 2;
+    const mobile = width <= 680;
+    const endX = mobile ? centerX - 5 : centerX - radiusX - 7;
+    const endY = mobile ? centerY - radiusY - 8 : centerY - 2;
     const preferredLeft = width <= 680 ? width * .18 : width * .22;
     const labelLeft = Math.max(16, Math.min(preferredLeft, endX - labelWidth - 48));
-    const startX = labelLeft + labelWidth + 14;
-    const startY = labelBottom - 25;
+    const startX = mobile ? centerX - 40 : labelLeft + labelWidth + 14;
+    const startY = mobile
+      ? zoneBottom - Math.min(105, Math.max(22, zoneBottom - zoneTop - 18))
+      : labelBottom - 25;
     const maxVisibleLines = Math.max(1, Math.floor((labelBottom - zoneTop - 8) / (width <= 680 ? 17 : 20)));
     setPosition({ width, height, labelLeft, labelBottom, labelWidth, maxVisibleLines, centerX, centerY, radiusX, radiusY, startX, startY, endX, endY });
   }, [buttonRef, zoneTop, zoneBottom]);
@@ -51,15 +54,18 @@ export default function PlayPrompt({ buttonRef, zoneTop, zoneBottom, reducedMoti
   const { width, height, labelLeft, labelBottom, labelWidth, maxVisibleLines, centerX: x, centerY: y, radiusX: rx, radiusY: ry, startX: sx, startY: sy, endX: ex, endY: ey } = position;
   const circle = `M ${x-rx+3} ${y-5} C ${x-rx-4} ${y-ry+5}, ${x-9} ${y-ry-5}, ${x+10} ${y-ry+1} C ${x+rx+3} ${y-ry+7}, ${x+rx+6} ${y+ry-10}, ${x+rx-3} ${y+ry-2} C ${x+5} ${y+ry+7}, ${x-rx-9} ${y+ry-3}, ${x-rx+3} ${y-5}`;
   const arrow = width <= 680
-    ? `M ${sx} ${sy} C ${sx+12} ${sy+12}, ${ex-13} ${ey-15}, ${ex} ${ey}`
+    ? `M ${sx} ${sy} C ${sx+3} ${sy+35}, ${ex-14} ${ey-30}, ${ex} ${ey}`
     : `M ${sx} ${sy} C ${sx + Math.max(52, width*.13)} ${sy-35}, ${ex - Math.max(62, width*.17)} ${ey-105}, ${ex} ${ey}`;
+  const arrowHead = width <= 680
+    ? `M ${ex-12} ${ey-13} Q ${ex-3} ${ey-5}, ${ex} ${ey} Q ${ex+5} ${ey-11}, ${ex+9} ${ey-16}`
+    : `M ${ex-17} ${ey-15} Q ${ex-6} ${ey-7}, ${ex} ${ey} Q ${ex-10} ${ey+3}, ${ex-20} ${ey+13}`;
 
   return createPortal(
     <div className="song-play-prompt" aria-hidden="true"
       style={{ '--prompt-arrow-color': RAINBOW[colorStep], '--prompt-circle-color': RAINBOW[(colorStep + 2) % RAINBOW.length] }}>
       <svg viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="none">
         <path d={arrow} className="song-play-prompt-arrow" />
-        <path d={`M ${ex-17} ${ey-15} Q ${ex-6} ${ey-7}, ${ex} ${ey} Q ${ex-10} ${ey+3}, ${ex-20} ${ey+13}`} className="song-play-prompt-arrow" />
+        <path d={arrowHead} className="song-play-prompt-arrow" />
         <path d={circle} className="song-play-prompt-circle" />
         <path d={`M ${x-rx+8} ${y-ry+1} Q ${x-4} ${y-ry-10}, ${x+rx-4} ${y-ry+6}`} className="song-play-prompt-circle song-play-prompt-sketch" />
       </svg>
