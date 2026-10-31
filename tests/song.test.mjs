@@ -76,3 +76,16 @@ test('MBV cues follow the recording and leave instrumental passages empty', asyn
  assert(visibleLyrics(cues,35));
  assert(visibleLyrics(cues,175));
 });
+
+test('MBV problem phrases and the returning verse follow the vocal entries', async () => {
+ const { readFile } = await import('node:fs/promises');
+ const cues = JSON.parse(await readFile(new URL('../src/when-you-sleep-lyrics.json', import.meta.url), 'utf8'));
+ assert.equal(visibleLyrics(cues, 60.5), null);
+ assert.deepEqual(visibleLyrics(cues, 62.6).words.map(w => w.text), ['When', 'you', 'walk']);
+ assert.equal(visibleLyrics(cues, 112).words.at(-1).text, 'hair');
+ assert.equal(visibleLyrics(cues, 142), null);
+ assert.equal(visibleLyrics(cues, 143.2).words[0].text, 'When');
+ assert.equal(visibleLyrics(cues, 146.6).index, 19);
+ assert.equal(visibleLyrics(cues, 173.5).index, 26);
+ assert.equal(visibleLyrics(cues, 177), null);
+});

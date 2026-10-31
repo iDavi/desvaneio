@@ -233,28 +233,28 @@
     ]
   },
   {
-    "start": 59.7,
-    "end": 64.16,
+    "start": 61.62,
+    "end": 64.78,
     "words": [
       {
         "text": "When",
-        "start": 59.7,
-        "end": 60.889
+        "start": 61.62,
+        "end": 62.14
       },
       {
         "text": "you",
-        "start": 60.889,
-        "end": 61.781
+        "start": 62.14,
+        "end": 62.54
       },
       {
         "text": "walk",
-        "start": 61.781,
-        "end": 62.971
+        "start": 62.54,
+        "end": 62.84
       },
       {
         "text": "away",
-        "start": 62.971,
-        "end": 64.16
+        "start": 62.84,
+        "end": 63.4
       }
     ]
   },
@@ -477,302 +477,302 @@
     ]
   },
   {
-    "start": 108.02,
-    "end": 112.98,
+    "start": 109.64,
+    "end": 113.39,
     "words": [
       {
         "text": "When",
-        "start": 108.02,
-        "end": 108.704
+        "start": 109.64,
+        "end": 109.96
       },
       {
         "text": "you",
-        "start": 108.704,
-        "end": 109.217
+        "start": 109.96,
+        "end": 110.26
       },
       {
         "text": "turn",
-        "start": 109.217,
-        "end": 109.901
+        "start": 110.26,
+        "end": 110.52
       },
       {
         "text": "your",
-        "start": 109.901,
-        "end": 110.586
+        "start": 110.52,
+        "end": 110.92
       },
       {
         "text": "long",
-        "start": 110.586,
-        "end": 111.27
+        "start": 110.92,
+        "end": 111.32
       },
       {
         "text": "blonde",
-        "start": 111.27,
-        "end": 112.296
+        "start": 111.32,
+        "end": 111.78
       },
       {
         "text": "hair",
-        "start": 112.296,
-        "end": 112.98
+        "start": 111.78,
+        "end": 112.58
       }
     ]
   },
   {
-    "start": 158.0,
-    "end": 161.8,
+    "start": 143.09,
+    "end": 146.42,
     "words": [
       {
         "text": "When",
-        "start": 158.0,
-        "end": 159.046
+        "start": 143.09,
+        "end": 143.31
       },
       {
         "text": "I",
-        "start": 159.046,
-        "end": 159.448
+        "start": 143.31,
+        "end": 143.55
       },
       {
         "text": "look",
-        "start": 159.448,
-        "end": 160.493
+        "start": 143.55,
+        "end": 143.89
       },
       {
         "text": "at",
-        "start": 160.493,
-        "end": 161.016
+        "start": 143.89,
+        "end": 144.25
       },
       {
         "text": "you",
-        "start": 161.016,
-        "end": 161.8
+        "start": 144.25,
+        "end": 145.21
       }
     ]
   },
   {
-    "start": 161.8,
-    "end": 165.8,
+    "start": 146.42,
+    "end": 151.07,
     "words": [
       {
         "text": "Oh,",
-        "start": 161.8,
-        "end": 162.6
+        "start": 146.42000000000002,
+        "end": 146.93
       },
       {
         "text": "I",
-        "start": 162.6,
-        "end": 162.8
+        "start": 147.19,
+        "end": 147.35
       },
       {
         "text": "don't",
-        "start": 162.8,
-        "end": 162.98
+        "start": 147.35,
+        "end": 148.11
       },
       {
         "text": "know",
-        "start": 162.98,
-        "end": 163.4
+        "start": 148.11,
+        "end": 148.31
       },
       {
         "text": "what's",
-        "start": 163.4,
-        "end": 164.22
+        "start": 148.31,
+        "end": 148.99
       },
       {
         "text": "real",
-        "start": 164.22,
-        "end": 165.3
+        "start": 148.99,
+        "end": 149.85
       }
     ]
   },
   {
-    "start": 165.8,
-    "end": 169.0,
+    "start": 151.07,
+    "end": 153.84,
     "words": [
       {
         "text": "Once",
-        "start": 165.8,
-        "end": 166.42
+        "start": 151.07,
+        "end": 151.57
       },
       {
         "text": "in",
-        "start": 166.42,
-        "end": 166.8
+        "start": 151.57,
+        "end": 151.83
       },
       {
         "text": "a",
-        "start": 166.8,
-        "end": 167.14
+        "start": 151.83,
+        "end": 152.25
       },
       {
         "text": "while",
-        "start": 167.14,
-        "end": 167.78
+        "start": 152.25,
+        "end": 153.25
       }
     ]
   },
   {
-    "start": 169.0,
-    "end": 172.32,
+    "start": 153.84,
+    "end": 157.6,
     "words": [
       {
         "text": "And",
-        "start": 169.0,
-        "end": 169.34
+        "start": 153.84,
+        "end": 154.19
       },
       {
         "text": "you",
-        "start": 169.34,
-        "end": 169.5
+        "start": 154.19,
+        "end": 154.43
       },
       {
         "text": "make",
-        "start": 169.5,
-        "end": 169.88
+        "start": 154.43,
+        "end": 154.85
       },
       {
         "text": "me",
-        "start": 169.88,
-        "end": 170.36
+        "start": 154.85,
+        "end": 155.37
       },
       {
         "text": "laugh",
-        "start": 170.36,
-        "end": 171.68
+        "start": 155.37,
+        "end": 156.55
       }
     ]
   },
   {
-    "start": 173.0,
-    "end": 176.6,
+    "start": 157.6,
+    "end": 160.88,
     "words": [
       {
         "text": "And",
-        "start": 173.0,
-        "end": 173.72
+        "start": 157.6,
+        "end": 157.89
       },
       {
         "text": "I'll",
-        "start": 173.72,
-        "end": 174.42
+        "start": 157.89,
+        "end": 158.37
       },
       {
         "text": "sleep",
-        "start": 174.42,
-        "end": 174.88
+        "start": 158.37,
+        "end": 158.65
       },
       {
         "text": "tomorrow",
-        "start": 174.88,
-        "end": 175.34
+        "start": 158.65,
+        "end": 159.69
       }
     ]
   },
   {
-    "start": 176.6,
-    "end": 180.22,
+    "start": 160.88,
+    "end": 165.92,
     "words": [
       {
         "text": "And",
-        "start": 176.6,
-        "end": 177.279
+        "start": 160.88,
+        "end": 161.37
       },
       {
         "text": "it",
-        "start": 177.279,
-        "end": 177.731
+        "start": 161.37,
+        "end": 162.43
       },
       {
         "text": "won't",
-        "start": 177.731,
-        "end": 178.862
+        "start": 162.43,
+        "end": 162.97
       },
       {
         "text": "be",
-        "start": 178.862,
-        "end": 179.315
+        "start": 162.97,
+        "end": 163.41
       },
       {
         "text": "long",
-        "start": 179.315,
-        "end": 180.22
+        "start": 163.41,
+        "end": 164.21
       }
     ]
   },
   {
-    "start": 181.0,
-    "end": 184.3,
+    "start": 165.92,
+    "end": 168.73,
     "words": [
       {
         "text": "Won't",
-        "start": 181.0,
-        "end": 182.031
+        "start": 165.92000000000002,
+        "end": 166.42
       },
       {
         "text": "stand",
-        "start": 182.031,
-        "end": 183.062
+        "start": 166.42,
+        "end": 166.78
       },
       {
         "text": "around",
-        "start": 183.062,
-        "end": 184.3
+        "start": 166.78,
+        "end": 167.8
       }
     ]
   },
   {
-    "start": 184.3,
-    "end": 188.0,
+    "start": 168.73,
+    "end": 173.38,
     "words": [
       {
         "text": "Then",
-        "start": 184.3,
-        "end": 185.171
+        "start": 168.73,
+        "end": 169.06
       },
       {
         "text": "you",
-        "start": 185.171,
-        "end": 185.824
+        "start": 169.06,
+        "end": 169.48
       },
       {
         "text": "take",
-        "start": 185.824,
-        "end": 186.694
+        "start": 169.48,
+        "end": 169.8
       },
       {
         "text": "me",
-        "start": 186.694,
-        "end": 187.129
+        "start": 169.8,
+        "end": 170.64
       },
       {
         "text": "down",
-        "start": 187.129,
-        "end": 188.0
+        "start": 170.64,
+        "end": 172.3
       }
     ]
   },
   {
-    "start": 188.0,
-    "end": 193.0,
+    "start": 173.38,
+    "end": 176.84,
     "words": [
       {
         "text": "When",
-        "start": 188.0,
-        "end": 189.333
+        "start": 173.38,
+        "end": 173.72
       },
       {
         "text": "you",
-        "start": 189.333,
-        "end": 190.333
+        "start": 173.72,
+        "end": 173.98
       },
       {
         "text": "walk",
-        "start": 190.333,
-        "end": 191.667
+        "start": 173.98,
+        "end": 174.5
       },
       {
         "text": "away",
-        "start": 191.667,
-        "end": 193.0
+        "start": 174.5,
+        "end": 175.16
       }
     ]
   }
