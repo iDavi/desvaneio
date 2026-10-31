@@ -5,7 +5,7 @@ import { chooseSong } from './songs.js';
 
 const songs = [
   { id: 'csirac', title: 'CSIRAC', artist: 'Ninajirachi', duration: 201.931, lyrics: csiracLyrics },
-  { id: 'when-you-sleep', title: 'When You Sleep', artist: 'my bloody valentine', duration: 251.88, lyrics: whenYouSleepLyrics },
+  { id: 'when-you-sleep', title: 'When You Sleep', artist: 'my bloody valentine', duration: 251.88, lyrics: whenYouSleepLyrics, startTime: whenYouSleepLyrics[0].words[0].start },
 ];
 import { visibleLyrics } from './songTimeline';
 import PlayPrompt from './PlayPrompt';
@@ -20,6 +20,7 @@ const CAT_CODES = [
 
 export default function SongRoom() {
   const [song] = useState(() => chooseSong(songs));
+  const startTime = song.startTime ?? 0;
   const room = useRef(null);
   const audio = useRef(null);
   const playButton = useRef(null);
@@ -28,7 +29,7 @@ export default function SongRoom() {
   const [view, setView] = useState({ bar: false, cats: false, top: 0, bottom: 0 });
   const [playing, setPlaying] = useState(false);
   const [hasPlayed, setHasPlayed] = useState(false);
-  const [time, setTime] = useState(0);
+  const [time, setTime] = useState(startTime);
   const [duration, setDuration] = useState(0);
   const [error, setError] = useState(false);
   const [catIndex, setCatIndex] = useState(0);
@@ -102,7 +103,7 @@ export default function SongRoom() {
     const media = audio.current;
     if (!media.paused) { userPaused.current = true; media.pause(); return; }
     userPaused.current = false;
-    if (media.ended) media.currentTime = 0;
+    if (media.ended) media.currentTime = startTime;
     try { await media.play(); setError(false); } catch { setError(true); }
   }
 
@@ -138,7 +139,11 @@ export default function SongRoom() {
       <audio ref={audio} preload="none" src={`${import.meta.env.BASE_URL}audio/${song.id}.m4a`}
         onPlay={() => { setPlaying(true); setHasPlayed(true); }} onPause={() => setPlaying(false)}
         onEnded={() => { setPlaying(false); setTime(audio.current.currentTime); }}
-        onLoadedMetadata={() => setDuration(audio.current.duration)}
+        onLoadedMetadata={() => {
+          audio.current.currentTime = startTime;
+          setTime(startTime);
+          setDuration(audio.current.duration);
+        }}
         onSeeked={() => setTime(audio.current.currentTime)} onError={() => setError(true)} />
       {showWords && <>
         <div className={`song-words${lyrics?.row ? ' is-row' : ''}`} aria-hidden="true"
