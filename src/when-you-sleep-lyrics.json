@@ -1,0 +1,779 @@
+[
+  {
+    "start": 30.1,
+    "end": 34.0,
+    "words": [
+      {
+        "text": "When",
+        "start": 30.1,
+        "end": 31.56
+      },
+      {
+        "text": "I",
+        "start": 31.56,
+        "end": 32.08
+      },
+      {
+        "text": "look",
+        "start": 32.08,
+        "end": 32.38
+      },
+      {
+        "text": "at",
+        "start": 32.38,
+        "end": 32.62
+      },
+      {
+        "text": "you",
+        "start": 32.62,
+        "end": 33.16
+      }
+    ]
+  },
+  {
+    "start": 34.58,
+    "end": 38.76,
+    "words": [
+      {
+        "text": "Oh,",
+        "start": 34.58,
+        "end": 35.24
+      },
+      {
+        "text": "I",
+        "start": 35.56,
+        "end": 35.94
+      },
+      {
+        "text": "don't",
+        "start": 35.94,
+        "end": 36.34
+      },
+      {
+        "text": "know",
+        "start": 36.34,
+        "end": 36.66
+      },
+      {
+        "text": "what's",
+        "start": 36.66,
+        "end": 37.3
+      },
+      {
+        "text": "real",
+        "start": 37.3,
+        "end": 37.8
+      }
+    ]
+  },
+  {
+    "start": 38.76,
+    "end": 41.12,
+    "words": [
+      {
+        "text": "Once",
+        "start": 38.76,
+        "end": 39.84
+      },
+      {
+        "text": "in",
+        "start": 39.84,
+        "end": 40.24
+      },
+      {
+        "text": "a",
+        "start": 40.24,
+        "end": 40.46
+      },
+      {
+        "text": "while",
+        "start": 40.46,
+        "end": 40.8
+      }
+    ]
+  },
+  {
+    "start": 42.0,
+    "end": 45.22,
+    "words": [
+      {
+        "text": "And",
+        "start": 42.0,
+        "end": 42.5
+      },
+      {
+        "text": "you",
+        "start": 42.5,
+        "end": 42.86
+      },
+      {
+        "text": "make",
+        "start": 42.86,
+        "end": 43.32
+      },
+      {
+        "text": "me",
+        "start": 43.32,
+        "end": 43.88
+      },
+      {
+        "text": "laugh",
+        "start": 43.88,
+        "end": 44.6
+      }
+    ]
+  },
+  {
+    "start": 45.22,
+    "end": 48.68,
+    "words": [
+      {
+        "text": "And",
+        "start": 45.22,
+        "end": 46.22
+      },
+      {
+        "text": "I'll",
+        "start": 46.22,
+        "end": 46.64
+      },
+      {
+        "text": "sleep",
+        "start": 46.64,
+        "end": 46.96
+      },
+      {
+        "text": "tomorrow",
+        "start": 46.96,
+        "end": 47.88
+      }
+    ]
+  },
+  {
+    "start": 48.68,
+    "end": 53.2,
+    "words": [
+      {
+        "text": "And",
+        "start": 48.68,
+        "end": 49.52
+      },
+      {
+        "text": "it",
+        "start": 49.52,
+        "end": 49.96
+      },
+      {
+        "text": "won't",
+        "start": 49.96,
+        "end": 51.34
+      },
+      {
+        "text": "be",
+        "start": 51.34,
+        "end": 51.56
+      },
+      {
+        "text": "long",
+        "start": 51.56,
+        "end": 52.28
+      }
+    ]
+  },
+  {
+    "start": 54.0,
+    "end": 56.46,
+    "words": [
+      {
+        "text": "Won't",
+        "start": 54.0,
+        "end": 54.72
+      },
+      {
+        "text": "stand",
+        "start": 54.72,
+        "end": 55.04
+      },
+      {
+        "text": "around",
+        "start": 55.04,
+        "end": 55.72
+      }
+    ]
+  },
+  {
+    "start": 56.46,
+    "end": 59.7,
+    "words": [
+      {
+        "text": "Then",
+        "start": 56.46,
+        "end": 57.38
+      },
+      {
+        "text": "you",
+        "start": 57.38,
+        "end": 57.78
+      },
+      {
+        "text": "take",
+        "start": 57.78,
+        "end": 58.18
+      },
+      {
+        "text": "me",
+        "start": 58.18,
+        "end": 59.16
+      },
+      {
+        "text": "down",
+        "start": 59.16,
+        "end": 59.68
+      }
+    ]
+  },
+  {
+    "start": 59.7,
+    "end": 64.16,
+    "words": [
+      {
+        "text": "When",
+        "start": 59.7,
+        "end": 60.889
+      },
+      {
+        "text": "you",
+        "start": 60.889,
+        "end": 61.781
+      },
+      {
+        "text": "walk",
+        "start": 61.781,
+        "end": 62.971
+      },
+      {
+        "text": "away",
+        "start": 62.971,
+        "end": 64.16
+      }
+    ]
+  },
+  {
+    "start": 79.18,
+    "end": 83.0,
+    "words": [
+      {
+        "text": "When",
+        "start": 79.18,
+        "end": 80.16
+      },
+      {
+        "text": "you",
+        "start": 80.16,
+        "end": 80.38
+      },
+      {
+        "text": "say:",
+        "start": 80.38,
+        "end": 80.66
+      },
+      {
+        "text": "I",
+        "start": 81.02,
+        "end": 81.1
+      },
+      {
+        "text": "do",
+        "start": 81.1,
+        "end": 81.52
+      }
+    ]
+  },
+  {
+    "start": 83.0,
+    "end": 87.16,
+    "words": [
+      {
+        "text": "Oh,",
+        "start": 83.0,
+        "end": 83.8
+      },
+      {
+        "text": "I",
+        "start": 83.84,
+        "end": 84.46
+      },
+      {
+        "text": "don't",
+        "start": 84.46,
+        "end": 84.9
+      },
+      {
+        "text": "believe",
+        "start": 84.9,
+        "end": 85.42
+      },
+      {
+        "text": "you",
+        "start": 85.42,
+        "end": 86.4
+      }
+    ]
+  },
+  {
+    "start": 87.16,
+    "end": 90.52,
+    "words": [
+      {
+        "text": "I",
+        "start": 87.16,
+        "end": 88.1
+      },
+      {
+        "text": "can't",
+        "start": 88.1,
+        "end": 88.56
+      },
+      {
+        "text": "forget",
+        "start": 88.56,
+        "end": 88.9
+      },
+      {
+        "text": "it",
+        "start": 88.9,
+        "end": 89.62
+      }
+    ]
+  },
+  {
+    "start": 90.52,
+    "end": 93.4,
+    "words": [
+      {
+        "text": "No,",
+        "start": 90.52,
+        "end": 91.672
+      },
+      {
+        "text": "ooh",
+        "start": 91.672,
+        "end": 93.4
+      }
+    ]
+  },
+  {
+    "start": 93.4,
+    "end": 97.2,
+    "words": [
+      {
+        "text": "When",
+        "start": 93.4,
+        "end": 94.6
+      },
+      {
+        "text": "you",
+        "start": 94.6,
+        "end": 94.96
+      },
+      {
+        "text": "sleep",
+        "start": 94.96,
+        "end": 95.32
+      },
+      {
+        "text": "tomorrow",
+        "start": 95.32,
+        "end": 96.4
+      }
+    ]
+  },
+  {
+    "start": 97.2,
+    "end": 101.16,
+    "words": [
+      {
+        "text": "And",
+        "start": 97.2,
+        "end": 97.98
+      },
+      {
+        "text": "it",
+        "start": 97.98,
+        "end": 98.18
+      },
+      {
+        "text": "won't",
+        "start": 98.18,
+        "end": 99.0
+      },
+      {
+        "text": "be",
+        "start": 99.0,
+        "end": 100.02
+      },
+      {
+        "text": "long",
+        "start": 100.02,
+        "end": 100.72
+      }
+    ]
+  },
+  {
+    "start": 101.16,
+    "end": 104.5,
+    "words": [
+      {
+        "text": "Once",
+        "start": 101.16,
+        "end": 103.08
+      },
+      {
+        "text": "in",
+        "start": 103.08,
+        "end": 103.44
+      },
+      {
+        "text": "a",
+        "start": 103.44,
+        "end": 103.7
+      },
+      {
+        "text": "while",
+        "start": 103.7,
+        "end": 104.24
+      }
+    ]
+  },
+  {
+    "start": 104.5,
+    "end": 108.02,
+    "words": [
+      {
+        "text": "When",
+        "start": 104.5,
+        "end": 105.74
+      },
+      {
+        "text": "you",
+        "start": 105.74,
+        "end": 106.18
+      },
+      {
+        "text": "make",
+        "start": 106.18,
+        "end": 106.46
+      },
+      {
+        "text": "me",
+        "start": 106.46,
+        "end": 107.5
+      },
+      {
+        "text": "smile",
+        "start": 107.5,
+        "end": 107.8
+      }
+    ]
+  },
+  {
+    "start": 108.02,
+    "end": 112.98,
+    "words": [
+      {
+        "text": "When",
+        "start": 108.02,
+        "end": 108.704
+      },
+      {
+        "text": "you",
+        "start": 108.704,
+        "end": 109.217
+      },
+      {
+        "text": "turn",
+        "start": 109.217,
+        "end": 109.901
+      },
+      {
+        "text": "your",
+        "start": 109.901,
+        "end": 110.586
+      },
+      {
+        "text": "long",
+        "start": 110.586,
+        "end": 111.27
+      },
+      {
+        "text": "blonde",
+        "start": 111.27,
+        "end": 112.296
+      },
+      {
+        "text": "hair",
+        "start": 112.296,
+        "end": 112.98
+      }
+    ]
+  },
+  {
+    "start": 158.0,
+    "end": 161.8,
+    "words": [
+      {
+        "text": "When",
+        "start": 158.0,
+        "end": 159.046
+      },
+      {
+        "text": "I",
+        "start": 159.046,
+        "end": 159.448
+      },
+      {
+        "text": "look",
+        "start": 159.448,
+        "end": 160.493
+      },
+      {
+        "text": "at",
+        "start": 160.493,
+        "end": 161.016
+      },
+      {
+        "text": "you",
+        "start": 161.016,
+        "end": 161.8
+      }
+    ]
+  },
+  {
+    "start": 161.8,
+    "end": 165.8,
+    "words": [
+      {
+        "text": "Oh,",
+        "start": 161.8,
+        "end": 162.6
+      },
+      {
+        "text": "I",
+        "start": 162.6,
+        "end": 162.8
+      },
+      {
+        "text": "don't",
+        "start": 162.8,
+        "end": 162.98
+      },
+      {
+        "text": "know",
+        "start": 162.98,
+        "end": 163.4
+      },
+      {
+        "text": "what's",
+        "start": 163.4,
+        "end": 164.22
+      },
+      {
+        "text": "real",
+        "start": 164.22,
+        "end": 165.3
+      }
+    ]
+  },
+  {
+    "start": 165.8,
+    "end": 169.0,
+    "words": [
+      {
+        "text": "Once",
+        "start": 165.8,
+        "end": 166.42
+      },
+      {
+        "text": "in",
+        "start": 166.42,
+        "end": 166.8
+      },
+      {
+        "text": "a",
+        "start": 166.8,
+        "end": 167.14
+      },
+      {
+        "text": "while",
+        "start": 167.14,
+        "end": 167.78
+      }
+    ]
+  },
+  {
+    "start": 169.0,
+    "end": 172.32,
+    "words": [
+      {
+        "text": "And",
+        "start": 169.0,
+        "end": 169.34
+      },
+      {
+        "text": "you",
+        "start": 169.34,
+        "end": 169.5
+      },
+      {
+        "text": "make",
+        "start": 169.5,
+        "end": 169.88
+      },
+      {
+        "text": "me",
+        "start": 169.88,
+        "end": 170.36
+      },
+      {
+        "text": "laugh",
+        "start": 170.36,
+        "end": 171.68
+      }
+    ]
+  },
+  {
+    "start": 173.0,
+    "end": 176.6,
+    "words": [
+      {
+        "text": "And",
+        "start": 173.0,
+        "end": 173.72
+      },
+      {
+        "text": "I'll",
+        "start": 173.72,
+        "end": 174.42
+      },
+      {
+        "text": "sleep",
+        "start": 174.42,
+        "end": 174.88
+      },
+      {
+        "text": "tomorrow",
+        "start": 174.88,
+        "end": 175.34
+      }
+    ]
+  },
+  {
+    "start": 176.6,
+    "end": 180.22,
+    "words": [
+      {
+        "text": "And",
+        "start": 176.6,
+        "end": 177.279
+      },
+      {
+        "text": "it",
+        "start": 177.279,
+        "end": 177.731
+      },
+      {
+        "text": "won't",
+        "start": 177.731,
+        "end": 178.862
+      },
+      {
+        "text": "be",
+        "start": 178.862,
+        "end": 179.315
+      },
+      {
+        "text": "long",
+        "start": 179.315,
+        "end": 180.22
+      }
+    ]
+  },
+  {
+    "start": 181.0,
+    "end": 184.3,
+    "words": [
+      {
+        "text": "Won't",
+        "start": 181.0,
+        "end": 182.031
+      },
+      {
+        "text": "stand",
+        "start": 182.031,
+        "end": 183.062
+      },
+      {
+        "text": "around",
+        "start": 183.062,
+        "end": 184.3
+      }
+    ]
+  },
+  {
+    "start": 184.3,
+    "end": 188.0,
+    "words": [
+      {
+        "text": "Then",
+        "start": 184.3,
+        "end": 185.171
+      },
+      {
+        "text": "you",
+        "start": 185.171,
+        "end": 185.824
+      },
+      {
+        "text": "take",
+        "start": 185.824,
+        "end": 186.694
+      },
+      {
+        "text": "me",
+        "start": 186.694,
+        "end": 187.129
+      },
+      {
+        "text": "down",
+        "start": 187.129,
+        "end": 188.0
+      }
+    ]
+  },
+  {
+    "start": 188.0,
+    "end": 193.0,
+    "words": [
+      {
+        "text": "When",
+        "start": 188.0,
+        "end": 189.333
+      },
+      {
+        "text": "you",
+        "start": 189.333,
+        "end": 190.333
+      },
+      {
+        "text": "walk",
+        "start": 190.333,
+        "end": 191.667
+      },
+      {
+        "text": "away",
+        "start": 191.667,
+        "end": 193.0
+      }
+    ]
+  }
+]

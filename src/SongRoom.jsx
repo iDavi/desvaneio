@@ -1,5 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import phrases from './csirac-lyrics.json';
+import csiracLyrics from './csirac-lyrics.json';
+import whenYouSleepLyrics from './when-you-sleep-lyrics.json';
+import { chooseSong } from './songs.js';
+
+const songs = [
+  { id: 'csirac', title: 'CSIRAC', artist: 'Ninajirachi', duration: 201.931, lyrics: csiracLyrics },
+  { id: 'when-you-sleep', title: 'When You Sleep', artist: 'my bloody valentine', duration: 251.88, lyrics: whenYouSleepLyrics },
+];
 import { visibleLyrics } from './songTimeline';
 import PlayPrompt from './PlayPrompt';
 
@@ -12,6 +19,7 @@ const CAT_CODES = [
 ];
 
 export default function SongRoom() {
+  const [song] = useState(() => chooseSong(songs));
   const room = useRef(null);
   const audio = useRef(null);
   const playButton = useRef(null);
@@ -98,7 +106,7 @@ export default function SongRoom() {
     try { await media.play(); setError(false); } catch { setError(true); }
   }
 
-  const lyrics = visibleLyrics(phrases, time, reducedMotion);
+  const lyrics = visibleLyrics(song.lyrics, time, reducedMotion);
   const showWords = view.bar && view.bottom > view.top;
   const showCats = view.cats && showWords && !lyrics?.words.some(word => word.visible);
 
@@ -126,8 +134,8 @@ export default function SongRoom() {
   }, [showCats, reducedMotion]);
 
   return (
-    <section ref={room} className="song-room" aria-label="CSIRAC — Ninajirachi">
-      <audio ref={audio} preload="none" src={`${import.meta.env.BASE_URL}audio/csirac.m4a`}
+    <section ref={room} className="song-room" aria-label={`${song.title} — ${song.artist}`}>
+      <audio ref={audio} preload="none" src={`${import.meta.env.BASE_URL}audio/${song.id}.m4a`}
         onPlay={() => { setPlaying(true); setHasPlayed(true); }} onPause={() => setPlaying(false)}
         onEnded={() => { setPlaying(false); setTime(audio.current.currentTime); }}
         onLoadedMetadata={() => setDuration(audio.current.duration)}
@@ -148,13 +156,13 @@ export default function SongRoom() {
       </div>}
       {view.bar && <div className="song-controls">
         <div className={`song-controls-inner${hasPlayed ? '' : ' is-awaiting-playback'}`}>
-          <span className="song-art" aria-hidden="true" />
-          <span className="song-credit"><strong>CSIRAC</strong><span>Ninajirachi</span></span>
-          <button ref={playButton} type="button" onClick={toggle} aria-label={playing ? 'Pausar CSIRAC' : 'Tocar CSIRAC'}>
+          <span className="song-art" aria-hidden="true" style={{ backgroundImage: `url("${import.meta.env.BASE_URL}images/${song.id}-cover.jpg")` }} />
+          <span className="song-credit"><strong>{song.title}</strong><span>{song.artist}</span></span>
+          <button ref={playButton} type="button" onClick={toggle} aria-label={`${playing ? 'Pausar' : 'Tocar'} ${song.title}`}>
             {playing ? 'Ⅱ' : '▶'}
           </button>
-          <span className="song-progress" style={{ '--song-progress': `${Math.min(100, time / (duration || 201.931) * 100)}%` }}>
-            <input type="range" min="0" max={duration || 201.931} step="0.1" value={time}
+          <span className="song-progress" style={{ '--song-progress': `${Math.min(100, time / (duration || song.duration) * 100)}%` }}>
+            <input type="range" min="0" max={duration || song.duration} step="0.1" value={time}
               aria-label="Posição da música" onChange={event => {
                 const value = Number(event.target.value); audio.current.currentTime = value; setTime(value);
               }} />

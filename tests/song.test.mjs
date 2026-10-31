@@ -47,3 +47,32 @@ test('the song cues are ordered, stay inside the recording, and leave the instru
  assert.equal(visibleLyrics(cues,130),null);
  assert.equal(visibleLyrics(cues,201.931),null);
 });
+
+test('both tracks can be selected with an equal random interval', async () => {
+ const { chooseSong } = await import('../src/songs.js');
+ const songs = ['csirac', 'when-you-sleep'];
+ for (const value of [0, 0.25, 0.499999]) assert.equal(chooseSong(songs, () => value), 'csirac');
+ for (const value of [0.5, 0.75, 0.999999]) assert.equal(chooseSong(songs, () => value), 'when-you-sleep');
+});
+
+test('MBV cues follow the recording and leave instrumental passages empty', async () => {
+ const {readFile} = await import('node:fs/promises');
+ const cues = JSON.parse(await readFile(new URL('../src/when-you-sleep-lyrics.json', import.meta.url), 'utf8'));
+ assert.equal(cues.length, 27);
+ let end = 0;
+ for (const phrase of cues) {
+  assert(phrase.start >= end && phrase.end > phrase.start && phrase.end <= 251.88);
+  end = phrase.end;
+  assert(phrase.words.length > 0);
+  let previous = phrase.start;
+  for (const word of phrase.words) {
+   assert(word.text.trim());
+   assert(word.start >= previous && word.start >= phrase.start);
+   assert(word.end > word.start && word.end <= phrase.end);
+   previous = word.end;
+  }
+ }
+ for (const time of [0, 20, 70, 140, 220, 251.88]) assert.equal(visibleLyrics(cues,time),null);
+ assert(visibleLyrics(cues,35));
+ assert(visibleLyrics(cues,175));
+});
