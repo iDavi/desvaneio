@@ -2,6 +2,15 @@
   "repository": "iDavi/desvaneio",
   "posts": [
     {
+      "number": 20,
+      "slug": "issue-20",
+      "title": "#confy",
+      "date": "2026-11-01",
+      "createdAt": "2026-11-01T13:50:48Z",
+      "body": "<img width=\"512\" height=\"467\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/6779d24c-87df-4680-8512-a4b62aa53e78\" />",
+      "issueUrl": "https://github.com/iDavi/desvaneio/issues/20"
+    },
+    {
       "number": 19,
       "slug": "issue-19",
       "title": "Sincerity, Authenticity and Profilicity",
