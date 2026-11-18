@@ -2,6 +2,15 @@
   "repository": "iDavi/desvaneio",
   "posts": [
     {
+      "number": 21,
+      "slug": "issue-21",
+      "title": "Quem é que lhe diz que o senhor tem uma posição?",
+      "date": "2026-11-18",
+      "createdAt": "2026-11-18T18:18:41Z",
+      "body": "Pense, meu caro, no mundo que o senhor leva dentro de si, então dê a esse pensamento o nome que quiser; pode ser lembrança da própria infância ou anseio do próprio futuro - apenas preste atenção no que surge a partir de dentro e eleve-o acima de tudo o que o senhor percebe em torno. Se um acontecimento mais íntimo é digno de todo o seu amor, é nesse acontecimento que o senhor deve trabalhar de algum modo, sem perder muito tempo nem muito esforço para esclarecer sua posição em relação aos outros homens. Quem é que lhe diz que o senhor tem uma posição?",
+      "issueUrl": "https://github.com/iDavi/desvaneio/issues/21"
+    },
+    {
       "number": 20,
       "slug": "issue-20",
       "title": "#confy",
